@@ -1,17 +1,20 @@
 import React, {Component} from 'react'
-
+import '../pages/landing.css'
+import Header from '../common/header'
 class Landing extends Component {
     render(){
         return (
-            <div style={{backgroundImage: `url(.../public/assets/smite-landing.png)`}} >
-                <div>
-                    <p>Gods And Goddesses</p>
-                </div>
-                <div>
-                    <p>Welcome to the battleground<br></br>
-                        of the builds</p>
-                </div>
-
+            <div className="background" >
+                <Header>                                
+                </Header>
+                <div className="hero">
+                    <div className="layout">
+                        <h2>Gods And Goddesses</h2>                                      
+                        <h1>Welcome to the battleground
+                        of <span className="strong">the builds</span></h1>  
+                    </div>                   
+                                     
+                </div>              
             </div>
         )
     }
