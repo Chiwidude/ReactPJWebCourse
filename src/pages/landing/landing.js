@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import '../pages/landing.css'
-import Header from '../common/header'
+import './landing.css'
+import Header from '../../common/header'
 class Landing extends Component {
     render(){
         return (
-            <div className="background" >
-                <Header>                                
+            <div className="background-landing" >
+                <Header isSigned= {false}>                                
                 </Header>
                 <div className="hero">
                     <div className="layout">

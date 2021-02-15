@@ -1,6 +1,6 @@
-.background {
+.background-landing {
     /* The image used */
-    background-image:linear-gradient(rgba(51, 81, 131, 0.65), rgba(51, 81, 131, 0.65)), url(../assets/smite-landing.png);
+    background-image:linear-gradient(rgba(51, 81, 131, 0.65), rgba(51, 81, 131, 0.65)), url(../../assets/smite-landing.png);
 
     /* Full height */
     height: 100%; 
@@ -20,7 +20,7 @@ top: 0px;
 margin-top: 190px;
 }
 
-h2 {
+.hero h2 {
     position: static;
     width: 496px;
     height: 70px;
@@ -46,7 +46,7 @@ h2 {
     height: 210px;
 }
 
-h1{
+.hero h1{
 position: static;
 height: 140px;
 font-weight: 800;

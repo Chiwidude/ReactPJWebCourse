@@ -37,10 +37,10 @@ const Links = [
     {title: `Gods`, path:`/gods`},
     {title: `Guides`, path:`/guides`},
     {title: `Sign-In/Sign-Up`, path:`/sign-in`},
-    /*{title: `profile`, path:`/profile`}*/
+    {title: `profile`, path:`/profile`}
 ]
 
-const Header = () => {
+const Header = (props) => {
     const classes = styles();
     return (
         <AppBar position="static" className={classes.appbar}>
@@ -48,11 +48,9 @@ const Header = () => {
                 <Container maxWidth="lg" className={classes.navDisplay}>
                     <Link to="/" className={classes.link}>
                         <img src={Logo} alt="smite-logo"></img>                                                                                
-                    </Link>
-
-                    < List component="nav" aria-labelledby="main-navigation" className = {[classes.navDisplay, classes.container].join(' ')}>
-                        {
-                            Links.map(
+                    </Link>                    
+                    < List component="nav" aria-labelledby="main-navigation" className = {[classes.navDisplay, classes.container].join(' ')}>                        
+                            {Links.map(
                                 ({title, path}) => (
                                     <Link className={classes.linkText} key={title} to={path}>
                                         <ListItem button>
@@ -60,7 +58,7 @@ const Header = () => {
                                         </ListItem>
                                     </Link>
                                 ))}
-                    </List>
+                    </List>                    
                 </Container>
                 
             </Toolbar>            

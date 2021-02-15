@@ -1,0 +1,95 @@
+
+
+.background-login {    
+    height: 100%; 
+    background: #000E40;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.main-box{    
+    margin: 5.02% auto;
+}
+
+.paper{
+    background-color: rgba(118, 118, 118, 0.5)!important;
+    border: 2px solid #E1E1E1;
+    box-sizing: border-box;
+    border-radius: 83px !important;
+    -webkit-border-radius: 83px !important;
+    -moz-border-radius: 83px !important;
+    -ms-border-radius: 83px !important;
+    -o-border-radius: 83px !important;
+}
+.paper img{
+    margin: 2% 40%;
+}
+.paper h2{
+    font-weight: 800;
+    font-size: 24.7471px;
+    line-height: 43px;
+    margin-inline-start: 145px;
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 0.75);
+    opacity: 0.75;
+    margin-bottom: 0;
+}
+
+.paper h1{
+    font-weight: 800;
+    font-size: 40.214px;
+    text-transform: uppercase;
+    line-height: 43px;
+    color: #FFFFFF;
+    margin-inline-start: 150px;
+    margin-top: 0;
+}
+
+.paper .input{    
+    margin: 0 10%;
+    width: 80%;
+    background: #C4C4C4;
+    border-radius: 8px;    
+}
+.paper .link{
+    text-decoration: none;    
+}
+
+.paper .text{
+    color:#E4E4E4;
+    margin-inline-start: 70px;
+    text-transform: capitalize;
+}
+
+.paper .button{
+    width: 80%;
+    margin: 0 10%;
+    background: #D7AE00;
+    color:#FFFFFF;
+    border: 1px solid #C4C4C4;
+}
+
+.paper .facebook {
+
+    width: 75%;
+    margin-left: 20%;
+    margin-right: 5%;
+    background: #3B5998;
+    border: 1px solid #C4C4C4;
+    color:#FFFFFF;
+}
+
+.paper .google {
+    width: 75%;
+    margin-right: 20%;
+    margin-left: 5%;
+    background: #4285F4;
+    border: 1px solid #C4C4C4;
+    color:#FFFFFF;
+}
+
+
+
