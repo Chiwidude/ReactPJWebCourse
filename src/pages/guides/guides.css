@@ -1,0 +1,29 @@
+.background{
+    height: 100%; 
+    background: #000E40;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.searchBar {
+    background-color: #BFBFBF !important;
+    width: 85%;
+    margin-left: 15%;
+}
+
+.searchBar button {
+    background-color: #335183 !important;
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    -ms-border-radius: 0 !important;
+    -o-border-radius: 0 !important;
+}
+
+.item-layout{
+    width: 80%;
+    margin-left: 7.5% !important;
+}

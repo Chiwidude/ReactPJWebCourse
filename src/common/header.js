@@ -33,7 +33,7 @@ const styles = makeStyles({
 });
 
 const Links = [
-    {title: `Latest Builds`, path:`/late-builds`},
+    {title: `Latest Builds`, path:`/latest-builds`},
     {title: `Gods`, path:`/gods`},
     {title: `Guides`, path:`/guides`},
     {title: `Sign-In/Sign-Up`, path:`/sign-in`},
