@@ -13,6 +13,8 @@ import SignIn from './pages/login/signIn'
 import Guides from './pages/guides/guides'
 import Builds from "./pages/latest-builds/latestBuilds"
 import GodsView from "./pages/gods/gods"
+import Profile from "./pages/profile/profile"
+import EditProfile from "./pages/edit-profile/EditProfile"
 
 const object = [{
   rating:"4.5",
@@ -117,7 +119,9 @@ ReactDOM.render(
         <Route path="/sign-in" component = {SignIn} />
         <Route path="/guides" component= {Guides} />
         <Route path="/latest-builds" component={Builds} />
-        <Route path="/gods" component =  {GodsView} />    
+        <Route path="/gods" component =  {GodsView} />
+        <Route path="/profile" component={Profile}/>
+        <Route path="/edit-profile" component={EditProfile}/>
         </Switch>          
       </Router>
     </ThemeProvider>

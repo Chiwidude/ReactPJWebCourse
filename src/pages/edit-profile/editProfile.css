@@ -1,0 +1,36 @@
+.label-input{
+    background-color: #335183 !important;
+}
+
+.label-input input{
+    color:whitesmoke
+}
+
+.label-input textarea {
+    color:whitesmoke
+}
+
+.background .save-edit{
+    background-color: #BABABA ;
+    background-blend-mode: luminosity;
+    border-radius: 6px;
+}
+.background .change-password{
+    background-color: #b89500;
+    color:lightgray;
+}
+
+.edit-img {
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    margin-left: 40%;
+}
+.background .upload-img {
+    background-color: #BABABA ;
+    background-blend-mode: luminosity;
+    border-radius: 6px;
+    margin-left: 40%;
+}

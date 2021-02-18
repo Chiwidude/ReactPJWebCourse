@@ -57,15 +57,15 @@ const SignIn = () => {
                                         <Grid container direction = "row" spacing = {0}>
                                             <Grid item xs={12} sm={6}>
                                                 <Button className="facebook"
-                                                startIcon = {<Icon path={mdiFacebook} size={1} title="facebook" color="#FFFFFF"/>} variant ="contained" type="submit">Facebook</Button>
+                                                startIcon = {<Icon path={mdiFacebook} size={1} title="facebook" color="#FFFFFF"/>} variant ="contained" >Facebook</Button>
                                             </Grid>
                                             <Grid item xs={12} sm={6}>
                                                 <Button className="google"
-                                                startIcon = {<Icon path={mdiGoogle} size={1} title="facebook" color="#FFFFFF"/>} variant ="contained" type="submit">Google</Button>
+                                                startIcon = {<Icon path={mdiGoogle} size={1} title="facebook" color="#FFFFFF"/>} variant ="contained" >Google</Button>
                                             </Grid>
                                         </Grid>
                                     </Grid>
-                                    <Grid item style={{marginBottom:20+'px'}}>
+                                    <Grid item style={{marginBottom:35+'px'}}>
                                     <Typography className="text" variant="overline" style={{marginInlineStart: 225+'px'}}>Not In Smite Builds? 
                                     <Link to="/" className="link"><Typography className="text" variant="overline" style={{marginInlineStart:5 + 'px'}}>Sign Up</Typography></Link></Typography>
                                     </Grid>
