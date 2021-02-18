@@ -79,7 +79,7 @@ const EditProfile = () => {
                                         </Typography>
                                     </Grid>
                                     <Grid item style={{padding:"1%"}} sm={10}>
-                                        <TextField name="email" style={{color:"whitesmoke !important"}} fullWidth defaultValue="franalonzo96@gmail.com"></TextField>
+                                        <TextField type="email" name="email" style={{color:"whitesmoke !important"}} fullWidth defaultValue="franalonzo96@gmail.com"></TextField>
                                     </Grid>
                                 </Grid>
                                 </Paper>
