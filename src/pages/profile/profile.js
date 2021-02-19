@@ -1,10 +1,29 @@
+import "./profile.css"
 import Header from "../../common/header"
 import Footer from "../../common/footer"
+import BoxList from "../../common/box-list"
 import {Grid, Paper, Typography, IconButton, Tooltip} from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
-import "./profile.css"
 import profile from "../../assets/profile.png"
 import {Link} from "react-router-dom"
+
+let arr1 = JSON.parse(localStorage.getItem("data"))
+let arr2 = JSON.parse(localStorage.getItem("data"))
+
+arr1 = arr1.filter(item => item.user === "Chiwidude");
+arr2 = arr2.filter(item => item.user === "Chiwidude")
+
+let arry = arr1.concat(arr2)
+
+const array = [];
+const map = new Map();
+
+for(const item of arry){
+    if(!map.has(item.title)){
+        map.set(item.title, true);
+        array.push(item)
+    }
+}
 
 const Profile = ()  => {
     return (
@@ -17,7 +36,7 @@ const Profile = ()  => {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid containerspacing = {0} style={{marginTop:40+"px", marginBottom:25 +"px"}}>
+                <Grid container direction="row" spacing = {0} style={{marginTop:40+"px", marginBottom:42 +"px"}}>
                     <Grid item xs = {6}>
                         <Grid container direction="column" spacing = {2} wrap="wrap">
                             <Grid item style={{height:150+"px"}}>
@@ -58,8 +77,27 @@ const Profile = ()  => {
                             </Paper>
                         </Grid>                        
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} className="scroll-list">
+                        <Grid container direction="row" justify = "center" style={{marginTop:40+"px"}}>
+                            <Grid item>
+                                <Typography variant="h5" style={{color: "#E1E1E1"}}>
+                                User Entries
+                                </Typography>
+                            </Grid>
+                        </Grid>
 
+                        <Grid container spacing = {0} className="list-container">
+                            {
+                                array.map(({rating, title, gods, roles, user, date}) => (
+                                    <Grid item className="item-layout" key = {title}>
+                                        <BoxList                                            
+                                            title = {title}
+                                            roles = {roles}
+                                            gods = {gods}
+                                        ></BoxList>
+                                    </Grid>  ))
+                            }
+                        </Grid>
                     </Grid>
                 </Grid>
             <Footer></Footer>

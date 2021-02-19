@@ -19,3 +19,27 @@
 .paper-profile {
     background-color: #335183 !important;
 }
+
+.scroll-list {
+    height: 350px;
+    width: auto;
+    overflow-y: scroll;
+    overflow-x: auto;     
+    overflow: -moz-scrollbars-none;  
+    -ms-overflow-style: none;
+}
+
+.scroll-list::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
+}
+
+.list-container {
+    height: auto;
+}
+
+.list-container .item-layout{
+    width: 90%;
+    margin-left: 2.5% !important;
+    margin-top: 40px;
+}

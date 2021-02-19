@@ -15,6 +15,7 @@ import Builds from "./pages/latest-builds/latestBuilds"
 import GodsView from "./pages/gods/gods"
 import Profile from "./pages/profile/profile"
 import EditProfile from "./pages/edit-profile/EditProfile"
+import Entry from "./pages/entries/Entry"
 
 const object = [{
   rating:"4.5",
@@ -122,6 +123,7 @@ ReactDOM.render(
         <Route path="/gods" component =  {GodsView} />
         <Route path="/profile" component={Profile}/>
         <Route path="/edit-profile" component={EditProfile}/>
+        <Route path="/create" ><Entry title="Create Build"></Entry> </Route>
         </Switch>          
       </Router>
     </ThemeProvider>
