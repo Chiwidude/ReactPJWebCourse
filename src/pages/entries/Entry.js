@@ -7,6 +7,12 @@ const onSubmit =event => {
     event.preventDefault();
 }
 const Entry = (props) => {
+    let itemInfo = [];
+    if(props.idItem !== undefined){
+        if(props.title.includes("Build")){
+            itemInfo = JSON.parse(localStorage.getItem("data-builds")).filter(x => x.id === props.item);
+        }
+    }
     return (
         <div className="background">
             <Header />

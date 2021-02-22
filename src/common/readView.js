@@ -6,6 +6,7 @@ import ContentBox from "./box-container"
 import Header from "./header"
 import Footer from "./footer"
 import { TwitterTimelineEmbed } from "react-twitter-embed";
+import TwitterContainer from "./TwitterFeed"
 const Template = (props) =>{
     const [searchValue, setValue] = useState();
     const object = props.object
@@ -40,21 +41,8 @@ const Template = (props) =>{
                             </Grid>  ))}                        
                     </Grid>
                 </Grid>
-                <Grid item xs={12} sm = {4}>
-                            <TwitterTimelineEmbed
-                                sourceType="profile"
-                                screenName="smitegame"
-                            options={{
-                                    height:400 ,
-                                    width: "90%"                                    
-                                }}
-                                theme="dark"
-                                noHeader
-                                noBorders
-                                noFooter
-                                autoHeight
-                                noScrollbar
-                    ></TwitterTimelineEmbed>
+                <Grid item xs={12} sm = {4} style={{height: "auto"}}>
+                            <TwitterContainer></TwitterContainer>
                 </Grid>
             </Grid>
 

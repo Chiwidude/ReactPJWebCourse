@@ -21,8 +21,9 @@
 }
 
 .scroll-list {
-    height: 350px;
+    height: 300px;
     width: auto;
+    margin-top: 20px;
     overflow-y: scroll;
     overflow-x: auto;     
     overflow: -moz-scrollbars-none;  
@@ -35,11 +36,16 @@
 }
 
 .list-container {
-    height: auto;
+    height: inherit;
 }
 
 .list-container .item-layout{
     width: 90%;
     margin-left: 2.5% !important;
-    margin-top: 40px;
+    margin-top: 20px;
+}
+
+#create-menu .LinkText {
+    text-decoration: none;
+    color: grey;
 }

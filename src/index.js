@@ -23,7 +23,8 @@ const object = [{
   gods: "Zeus",
   roles: "Solo, Jungle",
   user: "Chiwidude",
-  date:"february 16th, 2021"
+  date:"february 16th, 2021",
+  id:"1"
 },
 {
   rating:"4.9",
@@ -31,7 +32,8 @@ const object = [{
   gods: "Hun Batz, Susano",
   roles: "Solo, Jungle",
   user: "Masterchief117",
-  date:"february 16th, 2021"
+  date:"february 16th, 2021",
+  id:"2"
 },
 {
   rating:"4.7",
@@ -39,7 +41,8 @@ const object = [{
   gods: "",
   roles: "Support",
   user: "Chiwidude",
-  date:"february 16th, 2021"
+  date:"february 16th, 2021",
+  id:"3"
 },
 {
   rating:"4.8",
@@ -47,7 +50,8 @@ const object = [{
   gods: "Xbalanque",
   roles: "ADC",
   user: "Saitama14",
-  date:"february 16th, 2021"
+  date:"february 16th, 2021",
+  id:"4"
 },
 {
   rating:"4.5",
@@ -55,7 +59,8 @@ const object = [{
   gods: "",
   roles: "Jungle",
   user: "Peralta12",
-  date:"february 16th, 2021"
+  date:"february 16th, 2021",
+  id:"5"
 }]
 
 const object2 = [{
@@ -64,7 +69,8 @@ const object2 = [{
   gods: "Zeus",
   roles: "Solo, Jungle",
   user: "Chiwidude",
-  date:"february 16th, 2021"
+  date:"february 16th, 2021",
+  id:"1"
 },
 {
   rating:"4.9",
@@ -72,7 +78,8 @@ const object2 = [{
   gods: "Hun Batz, Susano",
   roles: "Solo, Jungle",
   user: "Masterchief117",
-  date:"february 16th, 2021"
+  date:"february 16th, 2021",
+  id:"2"
 },
 {
   rating:"4.7",
@@ -80,7 +87,8 @@ const object2 = [{
   gods: "",
   roles: "Support",
   user: "Chiwidude",
-  date:"february 16th, 2021"
+  date:"february 16th, 2021",
+  id:"3"
 },
 {
   rating:"4.8",
@@ -88,7 +96,8 @@ const object2 = [{
   gods: "Xbalanque",
   roles: "ADC",
   user: "Saitama14",
-  date:"february 16th, 2021"
+  date:"february 16th, 2021",
+  id:"4"
 },
 {
   rating:"4.5",
@@ -96,11 +105,13 @@ const object2 = [{
   gods: "",
   roles: "Jungle",
   user: "Peralta12",
-  date:"february 16th, 2021"
+  date:"february 16th, 2021",
+  id:"5"
 }]
 
 localStorage.setItem("data", JSON.stringify(object))
 localStorage.setItem("data-builds", JSON.stringify(object2))
+localStorage.setItem("user-signed", JSON.stringify({user:"Chiwidude", Description: "Best ADC NA "}));
 
 const theme = createMuiTheme({
   typography: {
@@ -123,7 +134,8 @@ ReactDOM.render(
         <Route path="/gods" component =  {GodsView} />
         <Route path="/profile" component={Profile}/>
         <Route path="/edit-profile" component={EditProfile}/>
-        <Route path="/create" ><Entry title="Create Build"></Entry> </Route>
+        <Route path="/create-build" ><Entry title="Create Build"></Entry> </Route>
+        <Route path="/create-guide" ><Entry title="Create Guide"></Entry> </Route>
         </Switch>          
       </Router>
     </ThemeProvider>
