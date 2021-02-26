@@ -3,7 +3,7 @@ import Template from "../../common/readView"
 const Guides = () =>{    
     const object = JSON.parse(localStorage.getItem("data"))
     return (
-        <Template object = {object}></Template>        
+        <Template path="/create-guide" object = {object}></Template>        
     )
 }
 

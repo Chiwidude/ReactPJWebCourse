@@ -1,4 +1,4 @@
-#root .background{
+#root .background-view{
     height: 100%; 
     background: #000E40;
     /* Center and scale the image nicely */
@@ -26,4 +26,13 @@
 .item-layout{
     width: 80%;
     margin-left: 7.5% !important;
+}
+.background-view .create {
+    background-color: #335183 !important;
+    border-radius: 2px !important;
+    -webkit-border-radius: 2px !important;
+    -moz-border-radius: 2px !important;
+    -ms-border-radius: 2px !important;
+    -o-border-radius: 2px !important;
+    color: whitesmoke;
 }

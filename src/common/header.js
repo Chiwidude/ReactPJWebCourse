@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {AppBar, Toolbar, List, ListItem, ListItemText, Container} from "@material-ui/core"
 import {makeStyles} from "@material-ui/core"
 import Logo from "../assets/icons8-smite.png"
@@ -32,15 +32,33 @@ const styles = makeStyles({
 
 });
 
-const Links = [
+const link1 = [
     {title: `Latest Builds`, path:`/latest-builds`},
     {title: `Gods`, path:`/gods`},
     {title: `Guides`, path:`/guides`},
-    {title: `Sign-In/Sign-Up`, path:`/sign-in`},
+    {title: `Sign-In/Sign-Up`, path:`/sign-in`}    
+]
+
+const link2 = [
+    {title: `Latest Builds`, path:`/latest-builds`},
+    {title: `Gods`, path:`/gods`},
+    {title: `Guides`, path:`/guides`},    
     {title: `profile`, path:`/profile`}
 ]
 
+
 const Header = (props) => {
+    const user = JSON.parse(localStorage.getItem("user-signed"));
+    let history = useHistory();
+    const logOut = e => {
+        e.preventDefault();
+        localStorage.removeItem("user-signed");
+        history.push("/");
+    }
+    let Links = link1;
+    if(user !== null){
+       Links = link2; 
+    }    
     const classes = styles();
     return (
         <AppBar position="static" className={classes.appbar}>
@@ -58,6 +76,13 @@ const Header = (props) => {
                                         </ListItem>
                                     </Link>
                                 ))}
+                                {
+                                    user !== null && <Link className = {classes.linkText} key="signout" to = "#">
+                                          <ListItem button onClick={logOut}>
+                                        <ListItemText className={classes.linkText} primary="sign out" />
+                                        </ListItem> 
+                                    </Link>
+                                }
                     </List>                    
                 </Container>
                 

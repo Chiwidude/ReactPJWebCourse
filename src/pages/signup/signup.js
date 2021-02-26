@@ -1,28 +1,35 @@
 import React, {useState} from "react";
-import "./editProfile.css"
+import "../edit-profile/editProfile.css"
 import Header from "../../common/header"
 import Footer from "../../common/footer"
 import {Grid, Paper, Typography, TextField, Button} from '@material-ui/core';
-import profile from "../../assets/profile.png"
+import profile from "../../assets/profile.png";
 import {useHistory} from "react-router-dom";
 
-const fileSelected = event => {
-    alert(event.target.value)
-    event.preventDefault();
-}
-const EditProfile = () => {
+
+const SignUp = () => {
+    const [inputs, setInputs] = useState({
+        name: "",
+        username: "",
+        description: "",
+        email: "",
+        img: ""
+    });
     let history = useHistory();
-    const user = JSON.parse(localStorage.getItem("user-signed"));
     const onSubmit = (event) => {        
         event.preventDefault();
-        const users = JSON.parse(localStorage.getItem("users"));
-        const index = users.findIndex( usr => usr.username === user.username);
-        users.splice(index, 1);
-        users.push(inputs);
-        localStorage.setItem("users", JSON.stringify(users));        
-        localStorage.setItem("user-signed", JSON.stringify(inputs));
-        history.push("/profile");
-    }    
+       let users = JSON.parse(localStorage.getItem("users"));
+       if(users === null){
+           users = [];
+           users.push(inputs);
+       }else{
+           users.push(inputs);
+       }
+       console.log(users);
+       localStorage.setItem("users", JSON.stringify(users));
+       history.push("/sign-in");
+               
+    }
     const handleChange = e => {
         const value = e.target.value;
         setInputs({
@@ -30,26 +37,17 @@ const EditProfile = () => {
         })
     }
     
-    const [inputs, setInputs] = useState(
-        {
-            name: user.name,
-            username: user.username,
-            description: user.description,
-            email: user.email,
-            img: user.img
-        }
-    );    
     return(
         <div className="background">
             <Header />
             <Grid container direction="row" justify="center" style={{marginTop:40+"px"}}>
                 <Grid item>
                         <Typography variant="h4" style={{color: "#E1E1E1"}}>
-                            Edit Profile
+                            Create Profile
                         </Typography>
                 </Grid>
             </Grid>
-            <Grid container direction="row" spacing = {0} style={{marginTop:40+"px", marginBottom:91+"px"}}>
+            <Grid container direction="row" spacing = {0} style={{marginTop:40+"px", marginBottom:"11%"}}>
                 <Grid item xs={12} sm={6}>
                     <form onSubmit={onSubmit}>
                         <Grid container direction="column" spacing={3} wrap="wrap" style={{width:90+"%", marginLeft:"5%"}}>                           
@@ -62,7 +60,7 @@ const EditProfile = () => {
                                         </Typography>
                                     </Grid>
                                     <Grid item style={{padding:"1%"}} sm={10}>
-                                        <TextField name="name" style={{color:"whitesmoke !important"}} fullWidth onChange={handleChange} value={inputs.name}></TextField>
+                                        <TextField name="name" onChange= {handleChange} value= {inputs.name} style={{color:"whitesmoke !important"}} fullWidth></TextField>
                                     </Grid>
                                 </Grid>
                                 </Paper>
@@ -76,7 +74,7 @@ const EditProfile = () => {
                                         </Typography>
                                     </Grid>
                                     <Grid item style={{padding:"1%"}} sm={10}>
-                                        <TextField name="username" style={{color:"whitesmoke !important"}} fullWidth onChange={handleChange} value={inputs.username}></TextField>
+                                        <TextField name="username" onChange= {handleChange} value= {inputs.username} style={{color:"whitesmoke !important"}} fullWidth></TextField>
                                     </Grid>
                                 </Grid>
                                 </Paper>
@@ -90,7 +88,7 @@ const EditProfile = () => {
                                         </Typography>
                                     </Grid>
                                     <Grid item style={{padding:"1%"}} sm={10}>
-                                        <TextField multiline name="description" style={{color:"whitesmoke !important"}} fullWidth onChange={handleChange} value={inputs.description}></TextField>
+                                        <TextField multiline name="description" onChange= {handleChange} value= {inputs.description} style={{color:"whitesmoke !important"}} fullWidth></TextField>
                                     </Grid>
                                 </Grid>
                                 </Paper>
@@ -104,15 +102,11 @@ const EditProfile = () => {
                                         </Typography>
                                     </Grid>
                                     <Grid item style={{padding:"1%"}} sm={10}>
-                                        <TextField type="email" name="email" style={{color:"whitesmoke !important"}} fullWidth onChange={handleChange} value={inputs.email}></TextField>
+                                        <TextField type="email" name="email" onChange= {handleChange} value= {inputs.email} style={{color:"whitesmoke !important"}} fullWidth></TextField>
                                     </Grid>
                                 </Grid>
                                 </Paper>
                             </Grid>
-                            <Grid item >
-                                <Button className="change-password" variant="outlined">Change Password</Button>
-                            </Grid>
-
                             <Grid item>
                                 <Grid container direction="row" justify="center">
                                     <Grid item style={{background:"white", borderRadius:"6px"}}>
@@ -142,7 +136,7 @@ const EditProfile = () => {
                         style={{display:"none"}}
                         id="contained-button-file"
                         type="file"
-                        onChange={handleChange}
+                        onChange= {handleChange}
                         />
                         <label htmlFor="contained-button-file">
                             <Button component="span" className="upload-img" >Upload image</Button>
@@ -157,4 +151,4 @@ const EditProfile = () => {
     )
 }
 
-export default EditProfile
+export default SignUp

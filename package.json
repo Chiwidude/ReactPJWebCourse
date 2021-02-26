@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@material-ui/data-grid": "^4.0.0-alpha.20",
     "@material-ui/icons": "^4.11.2",
     "@mdi/js": "^5.9.55",
     "@mdi/react": "^1.4.0",
+    "@sweetalert/with-react": "^0.1.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.0",
@@ -20,6 +22,7 @@
     "react-scripts": "4.0.2",
     "react-twitter-embed": "^3.0.3",
     "style-loader": "^2.0.0",
+    "sweetalert": "^2.1.2",
     "web-vitals": "^1.1.0"
   },
   "scripts": {

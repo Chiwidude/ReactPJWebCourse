@@ -1,18 +1,42 @@
+import React, {useState} from "react";
 import "./login.css"
 import Logo from "../../assets/icon-smite-125.png" 
 import {Grid, Paper, Button, TextField, Typography} from '@material-ui/core'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import { mdiFacebook } from '@mdi/js';
 import { mdiGoogle } from '@mdi/js';
 import Icon from '@mdi/react';
 
 
 
-const Submit = ()=>{
-    //alert("submited");
-}
 
 const SignIn = () => {
+    let history = useHistory();
+    const [inputs, setInputs] = useState({
+        email:"",
+        password:""                
+    });
+
+    const Submit = e =>{
+        e.preventDefault();
+        const users = JSON.parse(localStorage.getItem("users"));
+
+        let index = users.findIndex( user => user.email === inputs.email);
+        if(index === -1){
+            history.push("/sign-up");
+        }else{
+            const user = users[index];
+            localStorage.setItem("user-signed", JSON.stringify(user));
+            history.push("/");
+        }
+    }    
+    
+    const handleChange = e => {
+        const value = e.target.value;
+        setInputs({
+            ...inputs, [e.target.name]:value
+        })
+    }
     return(
         <div className="background-login">            
             <Grid container direction="row" justify="center" spacing= {0} className="main-box">
@@ -22,7 +46,7 @@ const SignIn = () => {
                                     <Grid item>                                                        
                                         <Grid container direction="column" justify="center" spacing={0} wrap="wrap">
                                             <Grid item >
-                                                <img src={Logo} alt="smite-logo"></img>
+                                               <Link to="/"> <img src={Logo} alt="smite-logo"></img></Link>
                                             </Grid>
                                             <Grid item>
                                                 <h2>Gods and Goddesses</h2>
@@ -31,17 +55,17 @@ const SignIn = () => {
                                         </Grid> 
                                     </Grid>
                                     <Grid item style={{paddingBottom:0}}>
-                                             <form onSubmit={Submit()}>
+                                             <form onSubmit={Submit}>
                                                 <Grid container direction="column" spacing={2} wrap="wrap">
                                                     <Grid item >   
                                                         <TextField type = "email" placeholder="Email"
-                                                        name="username" variant="outlined"      
-                                                        required autoFocus className="input" size="small" margin="dense" />                                                                                           
+                                                        name="email" variant="outlined"      
+                                                        required autoFocus className="input" size="small" margin="dense" onChange={handleChange} value={inputs.email} />                                                                                           
                                                     </Grid>
                                                     <Grid item>
                                                     <TextField type = "password" placeholder="Password"
                                                         name="password" variant="outlined"      
-                                                        required className="input" size ="small" margin="dense" />
+                                                        required className="input" size ="small" margin="dense" onChange={handleChange}  value={inputs.password}/>
                                                     </Grid>
                                                     <Grid item>
                                                         <Link to="/" className="link"><Typography className="text" variant="overline">Forgot your password</Typography></Link>
@@ -67,7 +91,7 @@ const SignIn = () => {
                                     </Grid>
                                     <Grid item style={{marginBottom:35+'px'}}>
                                     <Typography className="text" variant="overline" style={{marginInlineStart: 225+'px'}}>Not In Smite Builds? 
-                                    <Link to="/" className="link"><Typography className="text" variant="overline" style={{marginInlineStart:5 + 'px'}}>Sign Up</Typography></Link></Typography>
+                                    <Link to="/sign-up" className="link"><Typography className="text" variant="overline" style={{marginInlineStart:5 + 'px'}}>Sign Up</Typography></Link></Typography>
                                     </Grid>
 
                             </Grid>

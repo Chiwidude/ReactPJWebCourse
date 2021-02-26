@@ -4,7 +4,7 @@ const Builds = () => {
 
 const builds = JSON.parse(localStorage.getItem("data-builds"))
     return (
-        <Template object={builds}></Template>
+        <Template path="/create-build" object={builds}></Template>
     )
 }
 

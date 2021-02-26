@@ -9,17 +9,18 @@ import profile from "../../assets/profile.png"
 import {Link} from "react-router-dom";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-let arr1 = JSON.parse(localStorage.getItem("data"))
-let arr2 = JSON.parse(localStorage.getItem("data-builds"))
 
 
 
 const Profile = ()  => {
+    let arr1 = JSON.parse(localStorage.getItem("data"))
+    let arr2 = JSON.parse(localStorage.getItem("data-builds"))
     const [anchorEl,setAnchorEl] = React.useState(null);
     const user = JSON.parse(localStorage.getItem("user-signed"));
-    arr1 = arr1.filter(item => item.user === user.user);
-    arr2 = arr2.filter(item => item.user === user.user);
-
+    arr1 = arr1.filter(item => item.user === user.username);
+    arr1.forEach(item => item.type = "guide");    
+    arr2 = arr2.filter(item => item.user === user.username);
+    arr2.forEach(item => item.type = "build");
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
       };
@@ -39,7 +40,7 @@ const Profile = ()  => {
         array.push(item)
         }
     }
-     
+     console.log(array);
     return (
         <div className="background">
             <Header></Header>
@@ -76,7 +77,7 @@ const Profile = ()  => {
                             </Grid>
                             <Paper style={{backgroundColor:"#d0d0d0",margin:"0 5%", width:90+"%"}} elevation = {2}>
                                 <Grid item>                                
-                                    <Typography variant= "h6" style={{color: "#8c8c8c", margin:"0 5%", paddingTop:"2px"}}> Username:<span style={{color:"#7b7b7b"}}>{user.user}</span></Typography>                               
+                                    <Typography variant= "h6" style={{color: "#8c8c8c", margin:"0 5%", paddingTop:"2px"}}> Username:<span style={{color:"#7b7b7b"}}>{user.username}</span></Typography>                               
                                 </Grid>
                             </Paper>
 
@@ -86,8 +87,7 @@ const Profile = ()  => {
                                        Description:
                                        </Typography>
                                        <Typography variant="body2" style={{color:"#7b7b7b", margin:"0 5%", paddingTop:"2px"}} paragraph align="justify">
-                                        {user.Description}
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas viverra, ante a hendrerit porta, libero nunc lacinia ante, et aliquam sem ex cursus ex. Pellentesque orci nunc, mattis vitae justo volutpat, euismod consequat tellus. Mauris quis fermentum tortor. In eu mi ante. Quisque consequat, nunc sed varius luctus, dui purus.
+                                        {user.description}                                        
                                        </Typography>
                                 </Grid>
                             </Paper>
@@ -104,7 +104,7 @@ const Profile = ()  => {
                                             <IconButton onClick={handleClick}><AddCircleIcon style={{color:"whitesmoke"}}/></IconButton>
                                         </Tooltip>
                                             <Menu anchorEl={anchorEl} open = {Boolean(anchorEl)} onClose={handleClose} keepMounted id="create-menu"> 
-                                                <MenuItem onClik={handleClose}><Link to="/create-build" className="LinkText">Create Build</Link></MenuItem>
+                                                <MenuItem onClick={handleClose}><Link to="/create-build" className="LinkText">Create Build</Link></MenuItem>
                                                 <MenuItem onClick={handleClose}><Link to="/create-guide" className="LinkText">Create Guide</Link></MenuItem>
                                             </Menu>
                                         </Typography>                                        
@@ -114,13 +114,14 @@ const Profile = ()  => {
                             <Grid item className="scroll-list">
                                 <Grid container spacing = {0} className="list-container">
                                 {
-                                    array.map(({rating, title, gods, roles, user, date, id}) => (
+                                    array.map(({rating, title, gods, roles, user, date, id, type}) => (
                                         <Grid item className="item-layout" key = {title}>
                                             <BoxList                                            
                                                 title = {title}
                                                 roles = {roles}
                                                 gods = {gods}
                                                 id= {id}
+                                                type = {type}
                                             ></BoxList>
                                         </Grid>  ))
                                 }

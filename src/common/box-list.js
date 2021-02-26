@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/core"
 import {Link} from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-
+import swal from 'sweetalert';
 const styles = makeStyles({
     paper:{
         background:`#335183`
@@ -31,7 +31,34 @@ const styles = makeStyles({
     }
 });
 
-const BoxList = (props) =>{
+const Delete = (id, type) => {
+    swal({
+        title:"Are you sure?",
+        text: "Once deleted, you can't recover it",
+        icon:"warning",
+        buttons: true        
+    }).then( value => {
+        if(value){
+            if(type === "guide"){
+                let arr = JSON.parse(localStorage.getItem("data"));
+                let index = arr.findIndex(item => item.id === id);
+                arr.splice(index, 1);
+                localStorage.setItem("data", JSON.stringify(arr));
+            }else if(type ==="build"){
+                let arr = JSON.parse(localStorage.getItem("data-builds"));
+                let index = arr.findIndex(item => item.id === id);
+                arr.splice(index, 1);
+                localStorage.setItem("data-builds", JSON.stringify(arr));
+            }
+            swal("This item has been deleted").then( value => {
+                window.location.reload();
+            })
+        }
+    })
+    
+}
+
+const BoxList = (props) =>{    
         const classes = styles();
         return (
         <Paper elevation={2} className={classes.paper}>
@@ -67,7 +94,7 @@ const BoxList = (props) =>{
                         </Grid>
                         <Grid item>
                             <Tooltip title="Delete">
-                                <IconButton><DeleteIcon/></IconButton>
+                                <IconButton onClick= {() =>{Delete(props.id, props.type)}}><DeleteIcon/></IconButton>
                             </Tooltip>
                         </Grid>
                     </Grid>
