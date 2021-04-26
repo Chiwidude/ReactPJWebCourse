@@ -1,11 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import "../edit-profile/editProfile.css"
 import Header from "../../common/header"
 import Footer from "../../common/footer"
+import swal from 'sweetalert2'
 import {Grid, Paper, Typography, TextField, Button} from '@material-ui/core';
 import profile from "../../assets/profile.png";
 import {useHistory} from "react-router-dom";
-
+import {signUp} from "../../services/auth.service";
 
 const SignUp = () => {
     const [inputs, setInputs] = useState({
@@ -13,28 +14,35 @@ const SignUp = () => {
         username: "",
         description: "",
         email: "",
-        img: ""
+        img: "",
+        password:""
     });
     let history = useHistory();
-    const onSubmit = (event) => {        
+    const form = useRef();
+    const onSubmit = async (event) => {       
         event.preventDefault();
-       let users = JSON.parse(localStorage.getItem("users"));
-       if(users === null){
-           users = [];
-           users.push(inputs);
-       }else{
-           users.push(inputs);
-       }
-       console.log(users);
-       localStorage.setItem("users", JSON.stringify(users));
-       history.push("/sign-in");
+              
+        const response = await signUp({name:inputs.name, username:inputs.username, email:inputs.email, password:inputs.password, description: inputs.description});
+        if(response === 400){
+
+        }else if(response === 201){
+            swal.fire({
+                toast:true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'User has being created you can login now',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            history.push("/sign-in");
+        }       
                
     }
     const handleChange = e => {
         const value = e.target.value;
         setInputs({
             ...inputs, [e.target.name]:value
-        })
+        });
     }
     
     return(
@@ -49,7 +57,7 @@ const SignUp = () => {
             </Grid>
             <Grid container direction="row" spacing = {0} style={{marginTop:40+"px", marginBottom:"11%"}}>
                 <Grid item xs={12} sm={6}>
-                    <form onSubmit={onSubmit}>
+                    <form onSubmit={onSubmit} ref={form}>
                         <Grid container direction="column" spacing={3} wrap="wrap" style={{width:90+"%", marginLeft:"5%"}}>                           
                             <Grid item>
                                 <Paper elevation={2} className="label-input">
@@ -103,6 +111,20 @@ const SignUp = () => {
                                     </Grid>
                                     <Grid item style={{padding:"1%"}} sm={10}>
                                         <TextField type="email" name="email" onChange= {handleChange} value= {inputs.email} style={{color:"whitesmoke !important"}} fullWidth></TextField>
+                                    </Grid>
+                                </Grid>
+                                </Paper>
+                            </Grid>
+                            <Grid item>
+                                <Paper elevation={2} className="label-input">
+                                <Grid container spacing={0}>                                    
+                                    <Grid item style={{padding:"2% 0", background: "#C4C4C4"}} sm={2}>
+                                        <Typography style={{paddingLeft: "5%"}} variant="body2">
+                                            Password
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item style={{padding:"1%"}} sm={10}>
+                                        <TextField type="password" name="password" onChange= {handleChange} value= {inputs.password} style={{color:"whitesmoke !important"}} fullWidth></TextField>
                                     </Grid>
                                 </Grid>
                                 </Paper>

@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/core"
 import {Link} from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 const styles = makeStyles({
     paper:{
         background:`#335183`

@@ -16,7 +16,7 @@ const Profile = ()  => {
     let arr1 = JSON.parse(localStorage.getItem("data"))
     let arr2 = JSON.parse(localStorage.getItem("data-builds"))
     const [anchorEl,setAnchorEl] = React.useState(null);
-    const user = JSON.parse(localStorage.getItem("user-signed"));
+    const user = JSON.parse(localStorage.getItem("token")).username;
     arr1 = arr1.filter(item => item.user === user.username);
     arr1.forEach(item => item.type = "guide");    
     arr2 = arr2.filter(item => item.user === user.username);

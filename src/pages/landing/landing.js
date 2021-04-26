@@ -1,8 +1,7 @@
-import React, {Component} from 'react'
+import React from 'react'
 import './landing.css'
 import Header from '../../common/header'
-class Landing extends Component {
-    render(){      
+const Landing = () =>{
 const object = [{
     rating:"4.5",
     title: "Sample Guide 1",
@@ -111,7 +110,7 @@ const object = [{
                 </div>              
             </div>
         )
-    }
+    
 }
 
 export default Landing;

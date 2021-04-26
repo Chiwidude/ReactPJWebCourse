@@ -47,12 +47,12 @@ const link2 = [
 ]
 
 
-const Header = (props) => {
-    const user = JSON.parse(localStorage.getItem("user-signed"));
+const Header = (props) => {    
+    const user = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).username;
     let history = useHistory();
     const logOut = e => {
         e.preventDefault();
-        localStorage.removeItem("user-signed");
+        localStorage.removeItem("token");
         history.push("/");
     }
     let Links = link1;

@@ -1,5 +1,4 @@
-#root .background-view{
-    height: 100%; 
+#root .background-view{ 
     background: #000E40;
     /* Center and scale the image nicely */
     background-position: center;
@@ -7,7 +6,6 @@
     background-size: cover;
     overflow: hidden;
 }
-
 .searchBar {
     background-color: #BFBFBF !important;
     width: 85%;

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import "./login.css"
 import Logo from "../../assets/icon-smite-125.png" 
 import {Grid, Paper, Button, TextField, Typography} from '@material-ui/core'
@@ -6,27 +6,24 @@ import {Link, useHistory} from 'react-router-dom'
 import { mdiFacebook } from '@mdi/js';
 import { mdiGoogle } from '@mdi/js';
 import Icon from '@mdi/react';
-
+import {login} from '../../services/auth.service';
 
 
 
 const SignIn = () => {
     let history = useHistory();
+    const form = useRef();    
     const [inputs, setInputs] = useState({
         email:"",
         password:""                
     });
 
-    const Submit = e =>{
+    const Submit = async e =>{
         e.preventDefault();
-        const users = JSON.parse(localStorage.getItem("users"));
-
-        let index = users.findIndex( user => user.email === inputs.email);
-        if(index === -1){
+        const status = await login(inputs.email, inputs.password);
+        if(status === 400){
             history.push("/sign-up");
-        }else{
-            const user = users[index];
-            localStorage.setItem("user-signed", JSON.stringify(user));
+        }else if(status === 200){            
             history.push("/");
         }
     }    
@@ -55,7 +52,7 @@ const SignIn = () => {
                                         </Grid> 
                                     </Grid>
                                     <Grid item style={{paddingBottom:0}}>
-                                             <form onSubmit={Submit}>
+                                             <form onSubmit={Submit} ref={form}>
                                                 <Grid container direction="column" spacing={2} wrap="wrap">
                                                     <Grid item >   
                                                         <TextField type = "email" placeholder="Email"
