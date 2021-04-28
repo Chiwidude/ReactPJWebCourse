@@ -23,16 +23,26 @@ const SignUp = () => {
         event.preventDefault();
               
         const response = await signUp({name:inputs.name, username:inputs.username, email:inputs.email, password:inputs.password, description: inputs.description});
-        if(response === 400){
-
-        }else if(response === 201){
+        if(response.status === 400){
             swal.fire({
                 toast:true,
-                position: 'top-end',
+                position: 'bottom-end',
+                icon: 'error',
+                title: `User couldn't be created ${response.data.error}`,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar:true
+              })
+              history.push("/sign-up")
+        }else if(response.status === 201){
+            swal.fire({
+                toast:true,
+                position: 'bottom-end',
                 icon: 'success',
                 title: 'User has being created you can login now',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 3000,
+                timerProgressBar:true
               })
             history.push("/sign-in");
         }       

@@ -1,8 +1,10 @@
-import * as React from 'react'
+import  React, {useEffect, useState, useRef} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import {AppBar, Toolbar, List, ListItem, ListItemText, Container} from "@material-ui/core"
 import {makeStyles} from "@material-ui/core"
 import Logo from "../assets/icons8-smite.png"
+import {authorize} from "../services/auth.service";
+import swal from 'sweetalert2'
 const styles = makeStyles({
     navDisplay: {
         display: `flex`,
@@ -47,18 +49,40 @@ const link2 = [
 ]
 
 
-const Header = (props) => {    
-    const user = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).username;
-    let history = useHistory();
+const Header = (props) => {
+    let user = useRef();
+    let history = useRef();
+    user.current = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).username;
+    history.current = useHistory();
     const logOut = e => {
         e.preventDefault();
         localStorage.removeItem("token");
-        history.push("/");
+        history.current.push("/");
     }
-    let Links = link1;
-    if(user !== null){
-       Links = link2; 
-    }    
+    const[Links, setLinks] = useState(link1);
+    useEffect(()=> {
+        const auth = async () => {            
+            const response = await authorize();            
+            if(response.status === 200){
+                setLinks(link2);
+            }else if(response.status === 403){
+                swal.fire({
+                    toast:true,
+                    position: 'bottom-end',
+                    icon: 'error',
+                    title: `Session has expired`,
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar:true
+                })
+                localStorage.removeItem("token");
+                user.current = null;
+                history.current.push("/");            
+            }    
+        }
+        auth();
+        
+    },[])    
     const classes = styles();
     return (
         <AppBar position="static" className={classes.appbar}>
@@ -77,7 +101,7 @@ const Header = (props) => {
                                     </Link>
                                 ))}
                                 {
-                                    user !== null && <Link className = {classes.linkText} key="signout" to = "#">
+                                    user.current !== null && <Link className = {classes.linkText} key="signout" to = "#">
                                           <ListItem button onClick={logOut}>
                                         <ListItemText className={classes.linkText} primary="sign out" />
                                         </ListItem> 

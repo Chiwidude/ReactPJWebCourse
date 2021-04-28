@@ -5,6 +5,7 @@ import {Grid, Paper, Button, TextField, Typography} from '@material-ui/core'
 import {Link, useHistory} from 'react-router-dom'
 import { mdiFacebook } from '@mdi/js';
 import { mdiGoogle } from '@mdi/js';
+import swal from 'sweetalert2'
 import Icon from '@mdi/react';
 import {login} from '../../services/auth.service';
 
@@ -24,6 +25,15 @@ const SignIn = () => {
         if(status === 400){
             history.push("/sign-up");
         }else if(status === 200){            
+            swal.fire({
+                toast:true,
+                position: 'bottom-end',
+                icon: 'success',
+                title: `Welcome back!`,
+                showConfirmButton: false,
+                timer: 2500,
+                timerProgressBar:true
+              })
             history.push("/");
         }
     }    
