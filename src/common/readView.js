@@ -10,12 +10,10 @@ import TwitterContainer from "./TwitterFeed"
 import { useHistory} from 'react-router-dom';
 const Template = (props) =>{
     const [searchValue, setValue] = useState();
-    const [object, setObject] = useState(props.object);
-
+    const [object, setObject] = useState(props.object);    
    React.useEffect(() => {
-        windowListSize(window.innerWidth, props.object);
-        
-    })
+        windowListSize(window.innerWidth, props.object);        
+    }, [props.object])
     const windowListSize = (width, arr) => {
         if (width > 1270 && width < 1920){
             setObject(arr.slice(0,3));
@@ -50,8 +48,8 @@ const Template = (props) =>{
                 <Grid item xs = {12} sm = {8}>
                     <Grid container direction = "column" spacing = {5}>
                         {
-                            object.map(({rating, title, gods, roles, user, date}) => (
-                            <Grid item className="item-layout" key = {title}>
+                            object.map(({rating, title, gods, roles, user, date, _id, __v}) => (
+                            <Grid item className="item-layout" key = {_id}>
                                 <ContentBox
                                     rating={rating}
                                     title = {title}
@@ -59,6 +57,7 @@ const Template = (props) =>{
                                     gods = {gods}
                                     user = {user}
                                     lastdate = {date}
+                                    id = {_id}
                                 ></ContentBox>
                             </Grid>  ))}                        
                     </Grid>

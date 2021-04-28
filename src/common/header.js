@@ -54,12 +54,14 @@ const Header = (props) => {
     let history = useRef();
     user.current = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).username;
     history.current = useHistory();
+    const[Links, setLinks] = useState(link1);
     const logOut = e => {
         e.preventDefault();
         localStorage.removeItem("token");
+        setLinks(link1);
         history.current.push("/");
     }
-    const[Links, setLinks] = useState(link1);
+    
     useEffect(()=> {
         const auth = async () => {            
             const response = await authorize();            
