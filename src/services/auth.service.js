@@ -24,3 +24,9 @@ export const authorize = async() => {
     const response = await axios.get(API_URL+"authorize", {headers:{'authorization':`Bearer ${token}`}}).catch(err => err.response);
     return response;
 }
+
+export const userData = async(id) => {
+    const token = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).token;
+    const response = await axios.get(API_URL+id, {headers:{'authorization':`Bearer ${token}`}}).catch(err => err.response);
+    return response;
+}

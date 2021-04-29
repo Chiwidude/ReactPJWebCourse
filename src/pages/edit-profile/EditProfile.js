@@ -5,6 +5,7 @@ import Footer from "../../common/footer"
 import {Grid, Paper, Typography, TextField, Button} from '@material-ui/core';
 import profile from "../../assets/profile.png"
 import {useHistory} from "react-router-dom";
+import {userData} from '../../services/auth.service';
 
 const fileSelected = event => {
     alert(event.target.value)
@@ -12,7 +13,29 @@ const fileSelected = event => {
 }
 const EditProfile = () => {
     let history = useHistory();
-    const user = JSON.parse(localStorage.getItem("user-signed"));
+    const [user, setUser] = useState({});
+    const [inputs, setInputs] = useState({
+        name:"",
+        username:"",
+        description:"",
+        email:""
+    });
+    React.useEffect(() => {
+        const getUser = async () =>{
+            const id = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).id;
+            if(id !== null){
+                const response = await userData(id);
+                if(response.status === 200){
+                    setUser(response.data.user); 
+                    setInputs({name:response.data.user.name, username:response.data.user.username, description: response.data.user.description, email: response.data.user.email});
+                }else{
+                    history.push("/");
+                }
+            }
+
+        }
+        getUser();
+    },[history]);
     const onSubmit = (event) => {        
         event.preventDefault();
         const users = JSON.parse(localStorage.getItem("users"));
@@ -29,16 +52,8 @@ const EditProfile = () => {
             ...inputs, [e.target.name]:value
         })
     }
-    
-    const [inputs, setInputs] = useState(
-        {
-            name: user.name,
-            username: user.username,
-            description: user.description,
-            email: user.email,
-            img: user.img
-        }
-    );    
+
+        
     return(
         <div className="background">
             <Header />

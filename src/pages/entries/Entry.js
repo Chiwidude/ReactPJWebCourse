@@ -1,16 +1,31 @@
 import Header from "../../common/header"
 import Footer from "../../common/footer"
-import React from 'react'
+import React, {useRef} from 'react'
 import {Grid, Paper, Typography, TextField, Button} from '@material-ui/core';
-import CustomTable,{selection} from "../../common/Table"
+import CustomTable from "../../common/Table"
 import { useHistory} from 'react-router-dom';
+import {saveBuild} from '../../services/builds.service';
+import {saveGuide} from '../../services/guides.services';
+import swal from 'sweetalert2'
 const Entry = (props) => {
+    const handleGods = (data) => {        
+        setGods(data);
+    }
+    const handleItems = (data) => {
+        setItems(data);
+    }
+    const godsData = [
+        { id: 1, name: 'Zeus', pantheon: 'Greek', role: "Mage", dmg:"Magical" },
+        { id: 2, name: 'Hun Batz', pantheon: 'Mayan', role: "Assasin", dmg:"Physical" }];
+    const form = useRef();
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
+    const [gods, setGods] = React.useState([]);
+    const [items, setItems] = React.useState([]);
     let history = useHistory();
-    const onSubmit =event => {
+    const onSubmit =async(event) => {
         event.preventDefault();
-        const user = JSON.parse(localStorage.getItem("user-signed"));        
+        const user = JSON.parse(localStorage.getItem("token")).username;        
         const rating = "0.0";
         const localDate = new Date();
         const months = [
@@ -31,30 +46,62 @@ const Entry = (props) => {
         let currentMonth = months[localDate.getMonth()];
         let currentDate = localDate.getDate();
         let currentyear = localDate.getFullYear();
-
-        var ID = function () {
-            // Math.random should be unique because of its seeding algorithm.
-            // Convert it to base 36 (numbers + letters), and grab the first 9 characters
-            // after the decimal.
-            return '_' + Math.random().toString(36).substr(2, 9);
-          };
         const New = {rating:rating,
         title: name,
-        gods: "",
-        roles:"",
-        user: user.user,
-        date:currentMonth + " " + currentDate + "," + currentyear,
-        id:ID}        
-        if(props.title.includes("Build")){            
-            let temp = JSON.parse(localStorage.getItem("data-builds"));
-            temp.push(New);
-            localStorage.setItem("data-builds", JSON.stringify(temp));
-            history.push("/latest-builds");
+        gods: godsData.filter((row) => gods.includes(row.id)).map(x => x.name),
+        roles:godsData.filter((row) => gods.includes(row.id)).map(x => x.role),
+        user: user,
+        date:currentMonth + " " + currentDate + "," + currentyear}        
+        if(props.title.includes("Build")){         
+         const response = await saveBuild(New);
+         if(response === 201){
+            swal.fire({
+                toast:true,
+                position: 'bottom-end',
+                icon: 'success',
+                title: `The Build has being created`,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar:true
+            })
+           history.push("/latest-builds");
+         }else{
+            swal.fire({
+                toast:true,
+                position: 'bottom-end',
+                icon: 'error',
+                title: `The Build could not be created`,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar:true
+            })
+           history.push("/create-build");
+         }
         }else if(props.title.includes("Guide")){
-            let temp = JSON.parse(localStorage.getItem("data"));
-            temp.push(New);            
-            localStorage.setItem("data", JSON.stringify(temp));
-            history.push("/guides");
+            const response = await saveGuide(New);
+            if(response === 201){
+               swal.fire({
+                   toast:true,
+                   position: 'bottom-end',
+                   icon: 'success',
+                   title: `The Guide has being created`,
+                   showConfirmButton: false,
+                   timer: 3000,
+                   timerProgressBar:true
+               })
+              history.push("/guides");
+            }else{
+                swal.fire({
+                    toast:true,
+                    position: 'bottom-end',
+                    icon: 'error',
+                    title: `The Guide could not be created`,
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar:true
+                })
+               history.push("/create-guide");
+             }
         }        
 
     }    
@@ -68,8 +115,8 @@ const Entry = (props) => {
                         </Typography>
                 </Grid>
             </Grid>
-            <form onSubmit={onSubmit}>
-                <Grid container direction="row" spacing = {0} style={{marginTop:35+"px", marginBottom:10+"px"}}>
+            <form onSubmit={onSubmit} ref={form}>
+                <Grid container direction="row" spacing = {0} style={{marginTop:2.5+"%", marginBottom:10+"px"}}>
                     <Grid item xs={12} sm={6}>
                         
                             <Grid container direction="column" spacing={3} wrap="wrap" style={{width:90+"%", marginLeft:"5%"}}>                           
@@ -110,13 +157,11 @@ const Entry = (props) => {
                                 </Grid>
                                 <Grid item>
                                     <Paper elevation ={2} className="label-input">
-                                    <CustomTable columns = {[
+                                    <CustomTable parentCallBack = {handleGods} columns = {[
                                                     { field: 'name', headerName: 'Name', width:150},
                                                     { field: 'pantheon', headerName: 'Pantheon', width:132},
                                                     { field: 'role', headerName: 'Role',width:100},
-                                                    { field: 'dmg', headerName:'Damage', width:130}]} rows = {[
-                                                    { id: 1, name: 'Zeus', pantheon: 'Greek', role: "Mage", dmg:"Magical" },
-                                                    { id: 2, name: 'Hun Batz', pantheon: 'Mayan', role: "Assasin", dmg:"Physical" }]} height="200px" width="100%"/> 
+                                                    { field: 'dmg', headerName:'Damage', width:130}]} rows = {godsData} height="200px" width="100%"/> 
                                     </Paper>
                     
                                 </Grid>
@@ -140,7 +185,7 @@ const Entry = (props) => {
                             </Grid>
                             <Grid item>
                             <Paper elevation ={2} className="label-input" style={{width:"95%"}}>
-                                    <CustomTable columns = {[
+                                    <CustomTable parentCallBack = {handleItems} columns = {[
                                                     { field: 'name', headerName: 'Name', width:150},
                                                     { field: 'cost', headerName: 'Cost', width:120}]} rows = {[
                                                     { id: 1, name: 'Animosity', cost: '1500' },

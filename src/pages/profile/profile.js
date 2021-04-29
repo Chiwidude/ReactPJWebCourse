@@ -8,19 +8,34 @@ import EditIcon from '@material-ui/icons/Edit';
 import profile from "../../assets/profile.png"
 import {Link} from "react-router-dom";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import {userData} from '../../services/auth.service';
+import {getBuilds} from '../../services/builds.service';
+import { useHistory} from 'react-router-dom';
 
 
 
 
-const Profile = ()  => {
-    let arr1 = JSON.parse(localStorage.getItem("data"))
-    let arr2 = JSON.parse(localStorage.getItem("data-builds"))
+const Profile = ()  => {    
+    let arr2 = [];
+    let history = useHistory();
+    const [arrayBuilds, setArrayBuilds] = React.useState([]);
     const [anchorEl,setAnchorEl] = React.useState(null);
-    const user = JSON.parse(localStorage.getItem("token")).username;
-    arr1 = arr1.filter(item => item.user === user.username);
-    arr1.forEach(item => item.type = "guide");    
-    arr2 = arr2.filter(item => item.user === user.username);
-    arr2.forEach(item => item.type = "build");
+    const [user, setUser] = React.useState({});
+    React.useEffect(() => {
+        const getUser = async () =>{
+            const id = JSON.parse(localStorage.getItem("token")).id;
+            const response = await userData(id);
+            const response2 = await getBuilds();            
+            if(response.status === 200 && response2.status === 200){
+                setUser(response.data.user);
+                setArrayBuilds(response2.data.builds);                                
+            }else{
+                history.push("/");
+            }
+        }
+        getUser();
+    },[history]);    
+    arrayBuilds.forEach(item => item.type = "guide");
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
       };
@@ -29,18 +44,17 @@ const Profile = ()  => {
       };
 
 
-    let arry = arr1.concat(arr2)
+    let arry = arrayBuilds.concat(arr2);
 
     const array = [];
     const map = new Map();
 
     for(const item of arry){
-        if(!map.has(item.title)){
-        map.set(item.title, true);
+        if(!map.has(item._id)){
+        map.set(item._id, true);
         array.push(item)
         }
-    }
-     console.log(array);
+    }     
     return (
         <div className="background">
             <Header></Header>
@@ -114,13 +128,13 @@ const Profile = ()  => {
                             <Grid item className="scroll-list">
                                 <Grid container spacing = {0} className="list-container">
                                 {
-                                    array.map(({rating, title, gods, roles, user, date, id, type}) => (
-                                        <Grid item className="item-layout" key = {title}>
+                                    array.map(({rating, title, gods, roles, user, date, _id, type, __v}) => (
+                                        <Grid item className="item-layout" key = {_id}>
                                             <BoxList                                            
                                                 title = {title}
-                                                roles = {roles}
-                                                gods = {gods}
-                                                id= {id}
+                                                roles = {roles.join(",")}
+                                                gods = {gods.join(",")}
+                                                id= {_id}
                                                 type = {type}
                                             ></BoxList>
                                         </Grid>  ))
