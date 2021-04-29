@@ -6,6 +6,12 @@ export const getAll = async () => {
     const response = await axios.get(API_URL).catch(err => err.response);
     return response.data;
 }
+export const getGuides = async () => {
+    const username = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).username;
+    const token = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).token;
+    const response = await axios.get(API_URL+`?user=${username}`,{headers:{'authorization':`Bearer ${token}`}}).catch(err => err.response);
+    return response;
+}
 
 export const saveGuide = async (data) => {
     const token = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).token;

@@ -10,32 +10,39 @@ import {Link} from "react-router-dom";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import {userData} from '../../services/auth.service';
 import {getBuilds} from '../../services/builds.service';
+import {getGuides} from '../../services/guides.services';
 import { useHistory} from 'react-router-dom';
 
 
 
 
-const Profile = ()  => {    
-    let arr2 = [];
+const Profile = ()  => {        
     let history = useHistory();
     const [arrayBuilds, setArrayBuilds] = React.useState([]);
+    const [arrayGuides, setArrayGuides] = React.useState([]);
     const [anchorEl,setAnchorEl] = React.useState(null);
     const [user, setUser] = React.useState({});
     React.useEffect(() => {
         const getUser = async () =>{
-            const id = JSON.parse(localStorage.getItem("token")).id;
-            const response = await userData(id);
-            const response2 = await getBuilds();            
-            if(response.status === 200 && response2.status === 200){
-                setUser(response.data.user);
-                setArrayBuilds(response2.data.builds);                                
-            }else{
-                history.push("/");
+            const id = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).id;
+            if(id !== null){
+                const response = await userData(id);
+                const response2 = await getBuilds();
+                const response3 = await getGuides();                       
+                if(response.status === 200 && response2.status === 200 && response3.status===200){
+                    setUser(response.data.user);
+                    setArrayBuilds(response2.data.builds);
+                    setArrayGuides(response3.data.guides);
+                }else{
+                    history.push("/");
+                }
             }
+
         }
         getUser();
     },[history]);    
-    arrayBuilds.forEach(item => item.type = "guide");
+    arrayBuilds.forEach(item => item.type = "build");
+    arrayGuides.forEach(item => item.type = "guide");
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
       };
@@ -44,7 +51,7 @@ const Profile = ()  => {
       };
 
 
-    let arry = arrayBuilds.concat(arr2);
+    let arry = arrayBuilds.concat(arrayGuides);
 
     const array = [];
     const map = new Map();
@@ -65,7 +72,7 @@ const Profile = ()  => {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container direction="row" spacing = {0}  style={{paddingTop:40+"px", paddingBottom:42 +"px"}}>
+                <Grid container direction="row" spacing = {0}  style={{paddingTop:40+"px", marginBottom:19.5 +"%"}}>
                     <Grid item xs = {6}>
                         <Grid container direction="column" spacing = {2} wrap="wrap">
                             <Grid item style={{height:150+"px"}}>

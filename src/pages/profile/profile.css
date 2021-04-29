@@ -1,4 +1,5 @@
-.background{    
+.background{
+    height: inherit;    
     background: #000E40;
     /* Center and scale the image nicely */
     background-position: center;

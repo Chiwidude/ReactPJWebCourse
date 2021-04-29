@@ -1,5 +1,5 @@
 .background{
-    height: auto;
+    height: auto !important;
     background: #000E40;
     /* Center and scale the image nicely */
     background-position: center;
