@@ -60,7 +60,7 @@ const EditProfile = () => {
                         </Typography>
                 </Grid>
             </Grid>
-            <Grid container direction="row" spacing = {0} style={{marginTop:40+"px", marginBottom:91+"px"}}>
+            <Grid container direction="row" spacing = {0} className="gridSpaceEdit-profile">
                 <Grid item xs={12} sm={6}>
                     <form onSubmit={onSubmit}>
                         <Grid container direction="column" spacing={3} wrap="wrap" style={{width:90+"%", marginLeft:"5%"}}>                           

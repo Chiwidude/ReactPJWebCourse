@@ -34,3 +34,14 @@
     border-radius: 6px;
     margin-left: 40%;
 }
+.gridSpaceEdit-profile{
+    margin-top:40px;
+    margin-bottom:91px;   
+}
+
+@media screen and (max-width:1920px) and (min-width:1400px){
+    .gridSpaceEdit-profile{
+        margin-top:8%;
+        margin-bottom: 15%;
+    }
+}

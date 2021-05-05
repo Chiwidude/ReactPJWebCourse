@@ -64,7 +64,7 @@ const Profile = ()  => {
         }
     }     
     return (
-        <div className="background">
+        <div className="background-profile">
             <Header></Header>
                 <Grid container direction="row" justify = "center" style={{marginTop:40+"px"}}>
                     <Grid item>
@@ -73,7 +73,7 @@ const Profile = ()  => {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container direction="row" spacing = {0}  style={{paddingTop:40+"px", marginBottom:19.5 +"%"}}>
+                <Grid container direction="row" spacing = {0}  className="gridSpace-profile">
                     <Grid item xs = {6}>
                         <Grid container direction="column" spacing = {2} wrap="wrap">
                             <Grid item style={{height:150+"px"}}>
