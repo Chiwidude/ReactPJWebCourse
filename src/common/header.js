@@ -5,7 +5,6 @@ import {makeStyles} from "@material-ui/core"
 import Logo from "../assets/icons8-smite.png"
 import {authorize} from "../services/auth.service";
 import swal from 'sweetalert2'
-import userEvent from '@testing-library/user-event'
 const styles = makeStyles({
     navDisplay: {
         display: `flex`,

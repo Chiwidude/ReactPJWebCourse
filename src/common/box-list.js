@@ -1,9 +1,10 @@
 import {Grid, Paper, Typography, IconButton, Tooltip} from '@material-ui/core'
 import {makeStyles} from "@material-ui/core"
-import {Link} from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import swal from 'sweetalert2';
+import {deleteGuide} from "../services/guides.services";
+import {deleteBuild} from "../services/builds.service";
 const styles = makeStyles({
     paper:{
         background:`#335183`
@@ -31,34 +32,54 @@ const styles = makeStyles({
     }
 });
 
-const Delete = (id, type) => {
-    swal({
-        title:"Are you sure?",
-        text: "Once deleted, you can't recover it",
-        icon:"warning",
-        buttons: true        
-    }).then( value => {
-        if(value){
-            if(type === "guide"){
-                let arr = JSON.parse(localStorage.getItem("data"));
-                let index = arr.findIndex(item => item.id === id);
-                arr.splice(index, 1);
-                localStorage.setItem("data", JSON.stringify(arr));
-            }else if(type ==="build"){
-                let arr = JSON.parse(localStorage.getItem("data-builds"));
-                let index = arr.findIndex(item => item.id === id);
-                arr.splice(index, 1);
-                localStorage.setItem("data-builds", JSON.stringify(arr));
-            }
-            swal("This item has been deleted").then( value => {
-                window.location.reload();
-            })
-        }
-    })
-    
-}
 
-const BoxList = (props) =>{    
+
+const BoxList = (props) =>{  
+    const Delete = (id, type) => {
+        swal.fire({
+            title:"Are you sure?",
+            text: "Once deleted, you can't recover it",
+            icon:"warning",
+            buttons: true        
+        }).then( async(value) => {
+            if(value){
+                if(type === "guide"){
+                    const response = await deleteGuide(id);
+                    if(response === 204){
+                        swal.fire({
+                            toast:true,
+                            position: 'bottom-end',
+                            icon: 'success',
+                            title: `Guide deleted`,
+                            showConfirmButton: false,
+                            timer: 2500,
+                            timerProgressBar:true
+                        });
+                        props.parentCallback();                        
+                    }else if(response === 403){
+                        props.parentCallback();
+                    }
+                }else if(type ==="build"){
+                    const response = await deleteBuild(id);
+                    if(response === 204){
+                        swal.fire({
+                            toast:true,
+                            position: 'bottom-end',
+                            icon: 'success',
+                            title: `Build deleted`,
+                            showConfirmButton: false,
+                            timer: 2500,
+                            timerProgressBar:true
+                        });
+                        props.parentCallback();  
+                    }else if(response === 403){
+                        props.parentCallback();  
+                    }
+                }
+            }
+        })
+        
+    }  
         const classes = styles();
         return (
         <Paper elevation={2} className={classes.paper}>
@@ -94,7 +115,7 @@ const BoxList = (props) =>{
                         </Grid>
                         <Grid item>
                             <Tooltip title="Delete">
-                                <IconButton onClick= {() =>{Delete(props.id, props.type)}}><DeleteIcon/></IconButton>
+                                <IconButton onClick= {() =>{Delete(props.id, props.type);}}><DeleteIcon/></IconButton>
                             </Tooltip>
                         </Grid>
                     </Grid>

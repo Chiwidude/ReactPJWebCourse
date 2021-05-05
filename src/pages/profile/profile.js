@@ -15,8 +15,9 @@ import { useHistory} from 'react-router-dom';
 
 
 
-
 const Profile = ()  => {        
+    const [value, setValue] = React.useState(false);
+    const update = () => setValue(!value);
     let history = useHistory();
     const [arrayBuilds, setArrayBuilds] = React.useState([]);
     const [arrayGuides, setArrayGuides] = React.useState([]);
@@ -40,7 +41,7 @@ const Profile = ()  => {
 
         }
         getUser();
-    },[history]);    
+    },[history,value]);    
     arrayBuilds.forEach(item => item.type = "build");
     arrayGuides.forEach(item => item.type = "guide");
     const handleClick = (event) => {
@@ -143,6 +144,7 @@ const Profile = ()  => {
                                                 gods = {gods.join(",")}
                                                 id= {_id}
                                                 type = {type}
+                                                parentCallback = {update}
                                             ></BoxList>
                                         </Grid>  ))
                                 }

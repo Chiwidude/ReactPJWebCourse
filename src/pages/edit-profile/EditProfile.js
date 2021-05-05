@@ -7,10 +7,6 @@ import profile from "../../assets/profile.png"
 import {useHistory} from "react-router-dom";
 import {userData} from '../../services/auth.service';
 
-const fileSelected = event => {
-    alert(event.target.value)
-    event.preventDefault();
-}
 const EditProfile = () => {
     let history = useHistory();
     const [user, setUser] = useState({});
