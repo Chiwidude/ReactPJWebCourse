@@ -1,4 +1,5 @@
 import "./entry.css"
+import Header from "../../common/header"
 import Footer from "../../common/footer"
 import React, {useRef} from 'react'
 import {Grid, Paper, Typography, TextField, Button} from '@material-ui/core';
