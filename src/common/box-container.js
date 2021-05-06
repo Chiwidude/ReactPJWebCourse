@@ -1,5 +1,7 @@
-import {Grid, Paper, Typography} from '@material-ui/core'
+import {Grid, Paper, Typography, IconButton, Tooltip} from '@material-ui/core'
 import {makeStyles} from "@material-ui/core"
+import LaunchIcon from '@material-ui/icons/Launch';
+import {useHistory} from 'react-router-dom';
 import {Link} from 'react-router-dom'
 
 const styles = makeStyles({
@@ -29,6 +31,11 @@ const styles = makeStyles({
     }
 });
 const ContentBox = (props) => {
+    let history = useHistory();
+    const onClick = (e) => {
+        e.preventDefault();
+        history.push(`/view/${props.id}`);
+    }
     
     const classes = styles();
     
@@ -71,6 +78,11 @@ const ContentBox = (props) => {
                             </Typography>
                         </Grid>
                     </Grid>
+                </Grid>
+                <Grid item>
+                <Tooltip title="View Item" arrow> 
+                    <IconButton onClick={onClick}><LaunchIcon style={{color:"whitesmoke"}}/></IconButton>
+                </Tooltip>
                 </Grid>
             </Grid>
         </Paper>

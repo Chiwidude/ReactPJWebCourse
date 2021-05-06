@@ -36,3 +36,22 @@ export const deleteBuild = async (id) => {
     }
     return response.status;
 }
+
+export const getBuild = async(id) => {    
+    const token = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).token;
+    const response = await axios.get(API_URL+`${id}`,{headers:{'authorization':`Bearer ${token}`}}).catch(err => err.response);
+    return response;
+}
+
+export const updateBuild = async(id, data)=>{
+    const token = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).token;
+    const response = await axios.put(API_URL+id, data, {headers:{'authorization':`Bearer ${token}`}}).catch(err => err.response);
+    if(response.status === 204){
+        const object = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token"));
+        const newToken = response.headers.authorization;
+        object.token = newToken;
+        localStorage.setItem("token", JSON.stringify(object));        
+    }
+    return response;
+
+}

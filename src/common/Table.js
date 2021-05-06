@@ -16,7 +16,7 @@ function customCheckbox(theme) {
         display: 'none',
       },
       '& .MuiCheckbox-root.Mui-checked:not(.MuiCheckbox-indeterminate) svg': {
-        backgroundColor: '#001529',
+        backgroundColor: '# ',
         borderColor: '#001529',
       },
       '& .MuiCheckbox-root.Mui-checked .MuiIconButton-label:after': {
@@ -80,15 +80,26 @@ function customCheckbox(theme) {
       ...customCheckbox(theme),
     },
   }));
-const CustomTable = (props) => {    
-    const handleSelection = (newSelection) =>{        
+
+const CustomTable = (props) => {
+        
+    const handleSelection = (newSelection) =>{
+      if(props.count !== null){
+        const n = props.count.current;
+        props.count.current = n+1;
+      }
         props.parentCallBack(newSelection.selectionModel);        
     }
     const classes = useStyles();    
     return (<div style={{height:props.height, width:props.width}}>
-                   <DataGrid className={classes.root} checkboxSelection  onSelectionModelChange = {handleSelection}       
-                    disableColumnMenu showCellRightBorder rowHeight={28} pagination autoPageSize rows = {props.rows} columns = {props.columns} >
-                    </DataGrid>     
+               {  props.selected && <DataGrid className={classes.root} checkboxSelection = {props.checkbox} selectionModel= {props.selected}  onSelectionModelChange = {handleSelection}       
+                    disableColumnMenu showCellRightBorder disableSelectionOnClick rowHeight={28} pagination autoPageSize rows = {props.rows} columns = {props.columns} >
+                    </DataGrid> }
+                    {
+                      !props.selected &&  <DataGrid className={classes.root} checkboxSelection = {props.checkbox}  onSelectionModelChange = {handleSelection}       
+                      disableColumnMenu showCellRightBorder disableSelectionOnClick rowHeight={28} pagination autoPageSize rows = {props.rows} columns = {props.columns} >
+                      </DataGrid> 
+                    }  
     </div>)
 }
 

@@ -15,9 +15,9 @@ import Builds from "./pages/latest-builds/latestBuilds"
 import GodsView from "./pages/gods/gods"
 import Profile from "./pages/profile/profile"
 import EditProfile from "./pages/edit-profile/EditProfile"
-import Entry from "./pages/entries/Entry"
+import EntryScreen from "./pages/entries/entryScreen"
 import SignUp from "./pages/signup/signup"
-
+import ViewScreen from "./pages/edit-view entry/viewScreen"
 const theme = createMuiTheme({
   typography: {
     fontFamily: [
@@ -39,9 +39,12 @@ ReactDOM.render(
         <Route path="/gods" component =  {GodsView} />
         <Route path="/profile" component={Profile}/>
         <Route path="/edit-profile" component={EditProfile}/>
-        <Route path="/create-build" ><Entry title="Create Build"></Entry> </Route>
-        <Route path="/create-guide" ><Entry title="Create Guide"></Entry> </Route>
+        <Route path="/create-build" ><EntryScreen title="Create Build"></EntryScreen> </Route>
+        <Route path="/create-guide" ><EntryScreen title="Create Guide"></EntryScreen> </Route>
         <Route path="/sign-up" component={SignUp} />
+        <Route path="/edit-guide/:id"> <ViewScreen edit = {true} title = "guide"/> </Route>
+        <Route path="/edit-build/:id"> <ViewScreen edit = {true} title = "build"/> </Route>
+        <Route path="/view/:id"> <ViewScreen edit = {false}/></Route>
         </Switch>
       </Router>
     </ThemeProvider>

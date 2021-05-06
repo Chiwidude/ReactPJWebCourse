@@ -1,3 +1,16 @@
+.background-entry{
+    height: inherit !important;
+    background: #000E40;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+.entry-space {
+    margin-top:5%;
+    margin-bottom:11.2%;
+}
 .label-input-entry{
     background-color: #335183 !important;
 }
@@ -19,6 +32,9 @@
     background-color: #b89500;
     color:lightgray;
 }
+.title-space-entry{
+    margin-top:40px;
+}
 
 .edit-img-entry {
     border-radius: 50%;
@@ -33,4 +49,14 @@
     background-blend-mode: luminosity;
     border-radius: 6px;
     margin-left: 40%;
+}
+
+@media screen and (max-width:1378px) and (min-width:1280px){
+    .entry-space {
+        margin-top:2.5%;
+        margin-bottom:0.7%;
+    }
+    .title-space-entry{
+        margin-top:0px;
+    }
 }
