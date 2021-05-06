@@ -3,6 +3,7 @@ import {makeStyles} from "@material-ui/core"
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import swal from 'sweetalert2';
+import {useHistory} from 'react-router-dom';
 import {deleteGuide} from "../services/guides.services";
 import {deleteBuild} from "../services/builds.service";
 const styles = makeStyles({
@@ -34,7 +35,17 @@ const styles = makeStyles({
 
 
 
-const BoxList = (props) =>{  
+const BoxList = (props) =>{
+    const history = useHistory();
+    
+    const redirect = (e) =>{
+        e.preventDefault();
+        if(props.type === "guide"){
+            history.push(`/edit-guide/${props.id}`);
+        }else if(props.type === "build"){
+            history.push(`/edit-build/${props.id}`);
+        }        
+    }
     const Delete = (id, type) => {
         swal.fire({
             title:"Are you sure?",
@@ -109,7 +120,7 @@ const BoxList = (props) =>{
                     <Grid container direction="row" style={{paddingTop: "8%"}}>
                         <Grid item> 
                         <Tooltip title="Edit">
-                            <IconButton><EditIcon/></IconButton>
+                            <IconButton onClick = {redirect}><EditIcon/></IconButton>
                         </Tooltip>                          
                                 
                         </Grid>
