@@ -15,15 +15,8 @@ const Template = (props) =>{
     const [object, setObject] = useState(props.object);
     const button = useRef();    
    React.useEffect(() => {
-        windowListSize(window.innerWidth, props.object);        
-    }, [props.object])
-    const windowListSize = (width, arr) => {
-        if (width > 1270 && width < 1920){
-            setObject(arr.slice(0,3));
-        }else if(width >= 1920){
-            setObject(arr.slice(0,5));
-        }
-    }        
+       setObject(props.object);       
+    }, [props.object])     
     let history = useHistory();
     const click = async (e) => {
         e.preventDefault();
@@ -52,7 +45,7 @@ const Template = (props) =>{
     return (
         <div className="background-view">
             <Header></Header>
-            <Grid container direction="row" spacing={0} style={{marginTop:40+'px'}}>
+            <Grid container direction="row" spacing={0} style={{marginTop:40+'px'}}>   
                 <Grid item xs={12} sm={4}>
                 <SearchBar className="searchBar"
                     value={searchValue}
@@ -68,8 +61,7 @@ const Template = (props) =>{
                 </Grid>
             </Grid>
             <Grid container direction = "row" spacing = {0} style={{marginTop:40+'px', marginBottom:6.3+'%'}}>
-                <Grid item xs = {12} sm = {8}>
-                    <Grid container direction = "column" spacing = {5}>
+                <Grid item xs = {12} sm = {8} container direction = "column" spacing = {5}>
                         {
                             object.map(({rating, title, gods, roles, user, date, _id, __v}) => (
                             <Grid item className="item-layout" key = {_id}>
@@ -82,9 +74,10 @@ const Template = (props) =>{
                                     lastdate = {date}
                                     id = {_id}
                                 ></ContentBox>
-                            </Grid>  ))}                        
-                    </Grid>
-                    <Pagination count={5} />
+                            </Grid>  ))}  
+                            <Grid item>
+                                <Pagination count={5} />
+                            </Grid>                                       
                 </Grid>
                 <Grid item xs={12} sm = {4} style={{height: "auto"}}>
                             <TwitterContainer></TwitterContainer>

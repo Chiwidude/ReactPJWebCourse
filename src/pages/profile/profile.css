@@ -51,12 +51,18 @@
 }
 .gridSpace-profile {
     padding-top:40px;
-     margin-bottom:19.5%;
+     height: 80%;
 }
 
+@media only screen and (max-width:900px){
+    .background-profile{
+        height: auto !important;
+    }
+}
 @media screen and (max-width: 1378px) and (min-width: 1280px){
 
     .gridSpace-profile{
-        margin-bottom:4.6%;
+        padding-top: 20px;
+        height: 70%;
     }
 }

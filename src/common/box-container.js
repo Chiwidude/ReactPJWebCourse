@@ -42,11 +42,10 @@ const ContentBox = (props) => {
     return (
         <Paper elevation={2} className={classes.paper}>
             <Grid container spacing = {1}>
-                <Grid item className={classes.rating}>
-                    <Typography variant="h5" style={{marginTop:15+ "%"}}>{props.rating}</Typography>
+                <Grid item zeroMinWidth xs = {1} className={classes.rating}>
+                    <Typography noWrap display="inline" variant="h6" style={{marginTop:15+ "%"}}>{props.rating}</Typography>
                 </Grid>
-                <Grid item className={classes.content} style={{width:58+"%"}}>
-                    <Grid container spacing = {0} direction = "column">
+                <Grid item xs = {6} container spacing = {0} direction = "column" className={classes.content} style={{width:58+"%"}}>
                         <Grid item>
                             <Typography variant="body1" className={classes.title}>
                                 {props.title}
@@ -60,10 +59,8 @@ const ContentBox = (props) => {
                                 Recommended Gods: <span className={classes.txtRecon}>{props.gods}</span> 
                             </Typography>
                         </Grid>
-                    </Grid>
                 </Grid>
-                <Grid item>
-                    <Grid container spacing = {1} direction = "column">
+                <Grid item container xs = {4} spacing = {1} direction = "column">                    
                         <Grid item>
                             <Typography style={{fontSize:0.8+"rem"}} className={classes.extraText} align = "center" variant ="subtitle2">
                                 Created By
@@ -77,9 +74,9 @@ const ContentBox = (props) => {
                                 Updated {props.lastdate}
                             </Typography>
                         </Grid>
-                    </Grid>
+                    
                 </Grid>
-                <Grid item>
+                <Grid item xs = {1}>
                 <Tooltip title="View Item" arrow> 
                     <IconButton onClick={onClick}><LaunchIcon style={{color:"whitesmoke"}}/></IconButton>
                 </Tooltip>

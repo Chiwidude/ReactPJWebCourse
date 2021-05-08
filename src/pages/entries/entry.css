@@ -51,6 +51,12 @@
     margin-left: 40%;
 }
 
+@media only screen and (max-width:900px){
+    .background-entry{
+        height: auto !important;
+    }
+}
+
 @media screen and (max-width:1378px) and (min-width:1280px){
     .entry-space {
         margin-top:2.5%;

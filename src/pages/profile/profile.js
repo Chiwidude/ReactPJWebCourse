@@ -73,15 +73,12 @@ const Profile = ()  => {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container direction="row" spacing = {0}  className="gridSpace-profile">
-                    <Grid item xs = {6}>
-                        <Grid container direction="column" spacing = {2} wrap="wrap">
-                            <Grid item style={{height:150+"px"}}>
-                                <Grid container direction="row" justify = "center" spacing = {1}>
+                <Grid container direction="row" wrap="wrap" spacing = {0}  className="gridSpace-profile">
+                    <Grid item container direction="column" spacing = {2}  xs = {12} sm = {6}>                        
+                            <Grid item  container direction="row" justify = "center" spacing = {1} style={{height:150+"px"}}>                                
                                 <Grid item>
                                         <img className="profile-img" src={profile} alt="prof-img"></img>
-                                    </Grid>                                  
-                                </Grid>
+                                </Grid>                                                                  
                             </Grid>
                             <Grid item style={{margin:"0 5%", width:90+"%"}}>                               
                                     <Paper style={{backgroundColor:"#335183"}} elevation = {1}>
@@ -113,10 +110,9 @@ const Profile = ()  => {
                                        </Typography>
                                 </Grid>
                             </Paper>
-                        </Grid>                        
+                                               
                     </Grid>
-                    <Grid item xs={6}>
-                        <Grid container direction="column" spacing={1}>
+                    <Grid item container direction="column" spacing={1}  xs = {12} sm = {6}>                        
                             <Grid item>
                                 <Grid container direction="row" justify = "center" style={{marginTop:40+"px"}}>
                                     <Grid item>
@@ -149,9 +145,7 @@ const Profile = ()  => {
                                         </Grid>  ))
                                 }
                                 </Grid>
-                            </Grid>
-                        </Grid>
-
+                            </Grid>                       
                     </Grid>
                 </Grid>
             <Footer></Footer>

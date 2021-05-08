@@ -5,8 +5,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme, responsiveFontSizes,MuiThemeProvider } from '@material-ui/core';
 
 import Landing from './pages/landing/landing'
 import SignIn from './pages/login/signIn'
@@ -27,9 +26,11 @@ const theme = createMuiTheme({
   }
 });
 
+const themeResponsive = responsiveFontSizes(theme);
+
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme= {theme}>
+    <MuiThemeProvider theme= {themeResponsive}>
       <Router>
         <Switch>
         <Route exact path="/"  component= {Landing}/>
@@ -47,7 +48,7 @@ ReactDOM.render(
         <Route path="/view/:id"> <ViewScreen edit = {false}/></Route>
         </Switch>
       </Router>
-    </ThemeProvider>
+    </MuiThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

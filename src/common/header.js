@@ -1,6 +1,7 @@
 import  React, {useEffect, useState, useRef} from 'react'
 import {Link, useHistory, useLocation} from 'react-router-dom'
-import {AppBar, Toolbar, List, ListItem, ListItemText, Container} from "@material-ui/core"
+import MenuIcon from "@material-ui/icons/Menu";
+import {AppBar, Toolbar, List, ListItem, ListItemText, Container, IconButton, Drawer, MenuItem} from "@material-ui/core"
 import {makeStyles} from "@material-ui/core"
 import Logo from "../assets/icons8-smite.png"
 import {authorize} from "../services/auth.service";
@@ -57,6 +58,11 @@ const Header = (props) => {
     history.current = useHistory();
     location.current = useLocation();
     const[Links, setLinks] = useState(link1);
+    const[view, setView] = useState({
+        mobileView: false,
+        drawerOpen: false
+    });
+    const { mobileView, drawerOpen } = view;
     const logOut = e => {
         e.preventDefault();
         localStorage.removeItem("token");
@@ -65,6 +71,13 @@ const Header = (props) => {
     }
     
     useEffect(()=> {
+        const setResponsiveness = () => {
+            return window.innerWidth < 900
+              ? setView((prevState) => ({ ...prevState, mobileView: true }))
+              : setView((prevState) => ({ ...prevState, mobileView: false }));
+          };
+          setResponsiveness();
+          window.addEventListener("resize", () => setResponsiveness());
         const auth = async () => {            
             const response = await authorize();            
             if(response.status === 200){
@@ -102,35 +115,82 @@ const Header = (props) => {
         }
         auth();
         
-    })    
+    },[mobileView]);   
     const classes = styles();
+    const DesktopView = ()=> {
+        return (<Toolbar className={classes.toolbar}>
+            <Container maxWidth="lg" className={classes.navDisplay}>
+                <Link to="/" className={classes.link}>
+                    <img src={Logo} alt="smite-logo"></img>                                                                                
+                </Link>                    
+                < List component="nav" aria-labelledby="main-navigation" className = {[classes.navDisplay, classes.container].join(' ')}>                        
+                        {Links.map(
+                            ({title, path}) => (
+                                <Link className={classes.linkText} key={title} to={path}>
+                                    <ListItem button>
+                                        <ListItemText primary={title} />
+                                    </ListItem>
+                                </Link>
+                            ))}
+                            {
+                                user.current !== null && <Link className = {classes.linkText} key="signout" to = "#">
+                                      <ListItem button onClick={logOut}>
+                                    <ListItemText className={classes.linkText} primary="sign out" />
+                                    </ListItem> 
+                                </Link>
+                            }
+                </List>                    
+            </Container>
+            
+        </Toolbar>);
+    }
+    const MobileView = () => {
+        const handleDrawerOpen = () => setView((prevState) => ({ ...prevState, drawerOpen: true }));
+        const handleDrawerClose = () => setView((prevState) => ({ ...prevState, drawerOpen: false }));
+        const getDrawerChoices = () => {
+            return (<div>
+                {Links.map(
+                            ({title, path}) => (
+                                <Link  key={title} to={path}>
+                                    <MenuItem className={classes.linkText}>{title}</MenuItem>
+                                </Link>
+                            ))}
+                            {
+                                user.current !== null && <Link key="signout" to = "#">
+                                    <MenuItem className={classes.linkText}>{"sign out"}</MenuItem>
+                                </Link>
+                            }
+            </div>)
+        }
+       return( 
+       <Toolbar>
+            <IconButton
+            {...{
+                edge: "start",
+                color: "inherit",
+                "aria-label": "menu",
+                "aria-haspopup": "true",
+                onClick: handleDrawerOpen
+            }}
+            >
+            <MenuIcon />
+            </IconButton>
+            <Drawer {...{
+            anchor: "left",
+            open: drawerOpen,
+            onClose: handleDrawerClose,
+          }}>
+            {getDrawerChoices()}
+            </Drawer>
+            <div>
+                <Link to="/" className={classes.link}>
+                    <img src={Logo} alt="smite-logo"></img>                                                                                
+                </Link> 
+            </div>
+        </Toolbar>);}
     return (
         <AppBar position="static" className={classes.appbar}>
-            <Toolbar className={classes.toolbar}>
-                <Container maxWidth="lg" className={classes.navDisplay}>
-                    <Link to="/" className={classes.link}>
-                        <img src={Logo} alt="smite-logo"></img>                                                                                
-                    </Link>                    
-                    < List component="nav" aria-labelledby="main-navigation" className = {[classes.navDisplay, classes.container].join(' ')}>                        
-                            {Links.map(
-                                ({title, path}) => (
-                                    <Link className={classes.linkText} key={title} to={path}>
-                                        <ListItem button>
-                                            <ListItemText primary={title} />
-                                        </ListItem>
-                                    </Link>
-                                ))}
-                                {
-                                    user.current !== null && <Link className = {classes.linkText} key="signout" to = "#">
-                                          <ListItem button onClick={logOut}>
-                                        <ListItemText className={classes.linkText} primary="sign out" />
-                                        </ListItem> 
-                                    </Link>
-                                }
-                    </List>                    
-                </Container>
-                
-            </Toolbar>            
+           {mobileView? MobileView() : DesktopView()}
         </AppBar>
     )
 }

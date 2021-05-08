@@ -22,7 +22,16 @@ const SignIn = () => {
     const Submit = async e =>{
         e.preventDefault();
         const status = await login(inputs.email, inputs.password);
-        if(status === 400){
+        if(status === 404){
+            swal.fire({
+                toast:true,
+                position: 'bottom-end',
+                icon: 'error',
+                title: `There's no such email registered`,
+                showConfirmButton: false,
+                timer: 2500,
+                timerProgressBar:true
+              })
             history.push("/sign-up");
         }else if(status === 200){            
             swal.fire({
@@ -35,6 +44,17 @@ const SignIn = () => {
                 timerProgressBar:true
               })
             history.push("/");
+        }else if(status === 400){
+            swal.fire({
+                toast:true,
+                position: 'bottom-end',
+                icon: 'error',
+                title: `Invalid email or password`,
+                showConfirmButton: false,
+                timer: 2500,
+                timerProgressBar:true
+              })
+            history.push("/sign-in");
         }
     }    
     

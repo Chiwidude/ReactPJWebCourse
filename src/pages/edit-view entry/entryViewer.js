@@ -99,7 +99,7 @@ const EntryViewer = (props) => {
                     setViewGods(filter);
                     
                 }else if(response2.status === 200){
-                    setName(response2.data.guide.title);
+                    setName(response2.data.guide.title);    
                     setDescription(response2.data.guide.description);
                     const list = response2.data.guide.gods;
                     const filter = godsData.filter((row) => list.includes(row.name));
