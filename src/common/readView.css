@@ -7,13 +7,13 @@
     background-size: cover;
     overflow: hidden;
 }
-.searchBar {
+.searchBar-read {
     background-color: #BFBFBF !important;
     width: 85%;
     margin-left: 15%;
 }
 
-.searchBar button {
+.searchBar-read button {
     background-color: #335183 !important;
     border-radius: 0 !important;
     -webkit-border-radius: 0 !important;
@@ -22,7 +22,7 @@
     -o-border-radius: 0 !important;
 }
 
-.item-layout{
+.item-layout-read{
     width: 80%;
     margin-left: 7.5% !important;
 }
@@ -34,4 +34,14 @@
     -ms-border-radius: 2px !important;
     -o-border-radius: 2px !important;
     color: whitesmoke;
+}
+
+@media only screen and (max-width:400px){
+    .searchBar-read {
+        margin-left: 5%;
+    }
+    .item-layout-read{
+        width: 100%;
+        margin-left: 7.5% !important;
+    }
 }

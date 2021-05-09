@@ -30,3 +30,9 @@ export const userData = async(id) => {
     const response = await axios.get(API_URL+id, {headers:{'authorization':`Bearer ${token}`}}).catch(err => err.response);
     return response;
 }
+
+export const updateUser = async(id, body) => {
+    const token = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).token;
+    const response = await axios.put(API_URL+id, body, {headers:{'authorization':`Bearer ${token}`}}).catch(err => err.response);
+    return response;
+}

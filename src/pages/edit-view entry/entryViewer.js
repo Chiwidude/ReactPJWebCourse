@@ -213,9 +213,7 @@ const EntryViewer = (props) => {
             </Grid>
             <form onSubmit={onSubmit} ref={form}>
                 <Grid container direction="row" spacing = {0} className="entry-space">
-                    <Grid item xs={12} sm={6}>
-                        
-                            <Grid container direction="column" spacing={3} wrap="wrap" style={{width:90+"%", marginLeft:"5%"}}>                           
+                    <Grid item container direction="column" spacing={3} wrap="wrap" style={{width:90+"%", marginLeft:"2px"}} xs={12} sm={6}>                                                     
                                 <Grid item>
                                     <Paper elevation={2} className="label-input">
                                     <Grid container spacing={0}>                                    
@@ -244,14 +242,23 @@ const EntryViewer = (props) => {
                                     </Grid>
                                     </Paper>
                                 </Grid>
-                                <Grid item>
+                                {props.edit && <Grid item>
+                                    <Grid container direction="row" justify="center">
+                                        <Grid item style={{background:"white", borderRadius:"6px"}}>
+                                            <Button  className="save-edit" type = "submit" variant="outlined" disabled={disable}><Typography variant="h5">Edit</Typography></Button>
+                                        </Grid>                                    
+                                    </Grid>                                
+                                </Grid>}                                                
+                    </Grid>
+                    <Grid item container direction="column" spacing={1} xs={12} sm={6}>                        
+                    <Grid item>
                                     <Grid container direction="row" justify="center">
                                         <Grid item>
                                             <Typography variant="h6" style={{color: "#E1E1E1"}}> Gods</Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid item>
+                                <Grid item style = {{marginLeft:1+"%", height:29+"rem"}}>
                                     <Paper elevation ={2} className="label-input">
                                     <CustomTable checkbox={props.edit} selected = {props.edit ? gods:[]} count = {props.edit?count:null}  parentCallBack = {handleGods} columns = {[
                                                     { field: 'name', headerName: 'Name', width:150},
@@ -260,35 +267,7 @@ const EntryViewer = (props) => {
                                                     { field: 'dmg', headerName:'Damage', width:130}]} rows = {props.edit? godsData: viewGods} height="200px" width="100%"/> 
                                     </Paper>
                     
-                                </Grid>
-                                {props.edit && <Grid item>
-                                    <Grid container direction="row" justify="center">
-                                        <Grid item style={{background:"white", borderRadius:"6px"}}>
-                                            <Button  className="save-edit" type = "submit" variant="outlined" disabled={disable}><Typography variant="h5">Edit</Typography></Button>
-                                        </Grid>                                    
-                                    </Grid>                                
-                                </Grid>}
-                            </Grid>                    
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Grid container direction="column" spacing={1}>
-                            <Grid item>
-                                <Grid container direction="row" justify="center">
-                                    <Grid item>
-                                        <Typography variant="h6" style={{color: "#E1E1E1"}}> Items</Typography>
-                                    </Grid>                                
-                                </Grid>
-                            </Grid>
-                            <Grid item>
-                            <Paper elevation ={2} className="label-input"  style={{width:"95%"}}>
-                                    <CustomTable checkbox={props.edit} selected = {props.edit ? items:[]} count = {props.edit?count:null} parentCallBack = {handleItems} columns = {[
-                                                    { field: 'name', headerName: 'Name', width:150},
-                                                    { field: 'cost', headerName: 'Cost', width:120}]} rows = {[
-                                                    { id: 1, name: 'Animosity', cost: '1500' },
-                                                    { id: 2, name: 'Asi', cost: '2550' }]} height="300px" width="100%"/> 
-                                    </Paper>
-                            </Grid>
-                        </Grid>
+                                </Grid>                   
                     </Grid>            
                 </Grid>
             </form>

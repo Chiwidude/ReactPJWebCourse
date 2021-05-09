@@ -1,6 +1,7 @@
+/* eslint-disable no-undef */
+import "./readView.css"
 import React, {useState, useRef} from 'react';
 import SearchBar from "material-ui-search-bar";
-import "./readView.css"
 import {Grid, Button} from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import ContentBox from "./box-container"
@@ -13,7 +14,17 @@ import {authorize} from "../services/auth.service";
 const Template = (props) =>{
     const [searchValue, setValue] = useState();
     const [object, setObject] = useState(props.object);
-    const button = useRef();    
+    const button = useRef(); 
+    const searched = (newvalue) => {          
+        setValue(newvalue);
+    }
+    const canceled = () => {
+        setObject(props.object);
+    }
+    const search = () => {
+        const filtered = object.filter(x => x.title.includes(searchValue));
+        setObject(filtered);
+    }
    React.useEffect(() => {
        setObject(props.object);       
     }, [props.object])     
@@ -47,9 +58,13 @@ const Template = (props) =>{
             <Header></Header>
             <Grid container direction="row" spacing={0} style={{marginTop:40+'px'}}>   
                 <Grid item xs={12} sm={4}>
-                <SearchBar className="searchBar"
+                <SearchBar className="searchBar-read"
+                   
+                    cancelOnEscape
                     value={searchValue}
-                    onChange={(newValue) => setValue(newValue)}
+                    onChange={searched}
+                    onRequestSearch={search}
+                    onCancelSearch ={canceled}
                      />                     
                 </Grid>
                 <Grid item xs={12} sm = {8}>
@@ -64,7 +79,7 @@ const Template = (props) =>{
                 <Grid item xs = {12} sm = {8} container direction = "column" spacing = {5}>
                         {
                             object.map(({rating, title, gods, roles, user, date, _id, __v}) => (
-                            <Grid item className="item-layout" key = {_id}>
+                            <Grid item className="item-layout-read" key = {_id}>
                                 <ContentBox
                                     rating={rating}
                                     title = {title}

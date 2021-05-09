@@ -2,19 +2,28 @@ import React, {useState} from "react";
 import "./editProfile.css"
 import Header from "../../common/header"
 import Footer from "../../common/footer"
-import {Grid, Paper, Typography, TextField, Button} from '@material-ui/core';
+import {Grid, Paper, Typography, TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@material-ui/core';
 import profile from "../../assets/profile.png"
 import {useHistory} from "react-router-dom";
-import {userData} from '../../services/auth.service';
-
+import {userData, updateUser} from '../../services/auth.service';
+import swal from 'sweetalert2'
 const EditProfile = () => {
     let history = useHistory();
     const [user, setUser] = useState({});
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+      };
     const [inputs, setInputs] = useState({
         name:"",
         username:"",
-        description:"",
-        email:""
+        email:"",
+        description:""
     });
     React.useEffect(() => {
         const getUser = async () =>{
@@ -32,15 +41,32 @@ const EditProfile = () => {
         }
         getUser();
     },[history]);
-    const onSubmit = (event) => {        
+    const onSubmit = async (event) => {
         event.preventDefault();
-        const users = JSON.parse(localStorage.getItem("users"));
-        const index = users.findIndex( usr => usr.username === user.username);
-        users.splice(index, 1);
-        users.push(inputs);
-        localStorage.setItem("users", JSON.stringify(users));        
-        localStorage.setItem("user-signed", JSON.stringify(inputs));
-        history.push("/profile");
+        const id = JSON.parse(localStorage.getItem("token")) === null ? null : JSON.parse(localStorage.getItem("token")).id;
+        const response = await updateUser(id, inputs);
+        if(response.status === 204){
+            swal.fire({
+                toast:true,
+                position: 'bottom-end',
+                icon: 'success',
+                title: `status ${response.status}:Your information has been updated.`,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar:true
+            })           
+            history.push("/profile");
+        }else{
+            swal.fire({
+                toast:true,
+                position: 'bottom-end',
+                icon: 'error',
+                title: `status ${response.status}:something unexpected happened, try again.`,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar:true
+            })
+        }        
     }    
     const handleChange = e => {
         const value = e.target.value;
@@ -121,7 +147,20 @@ const EditProfile = () => {
                                 </Paper>
                             </Grid>
                             <Grid item >
-                                <Button className="change-password" variant="outlined">Change Password</Button>
+                                <Button className="change-password" onClick={handleClickOpen} variant="outlined">Change Password</Button>
+                                <Dialog open={open} onClose={handleClose} aria-labelledby="form-change-password">
+                                    <DialogTitle id="form-change-password">Change Password</DialogTitle>
+                                    <DialogContent>
+                                        <DialogContentText>
+                                            You can change your password here
+                                        </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={handleClose}>
+                                            Cancel
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
                             </Grid>
 
                             <Grid item>
@@ -146,7 +185,7 @@ const EditProfile = () => {
                         <Grid item>
                             <img className="edit-img" src={profile} alt="prof-img"></img>
                         </Grid>
-                        <Grid item>
+                      {/*   <Grid item>
                         <input
                         name="img"
                         accept="image/*"
@@ -158,7 +197,7 @@ const EditProfile = () => {
                         <label htmlFor="contained-button-file">
                             <Button component="span" className="upload-img" >Upload image</Button>
                         </label>                            
-                        </Grid>
+                        </Grid>*/}
 
                     </Grid>
                 </Grid>  

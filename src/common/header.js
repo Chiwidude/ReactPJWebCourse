@@ -37,14 +37,12 @@ const styles = makeStyles({
 
 const link1 = [
     {title: `Latest Builds`, path:`/latest-builds`},
-    {title: `Gods`, path:`/gods`},
     {title: `Guides`, path:`/guides`},
     {title: `Sign-In/Sign-Up`, path:`/sign-in`}    
 ]
 
 const link2 = [
     {title: `Latest Builds`, path:`/latest-builds`},
-    {title: `Gods`, path:`/gods`},
     {title: `Guides`, path:`/guides`},    
     {title: `profile`, path:`/profile`}
 ]
@@ -114,6 +112,8 @@ const Header = () => {
             }    
         }
         auth();
+
+        return () => window.removeEventListener("resize", () => setResponsiveness());
         
     },[mobileView]);   
     const classes = styles();

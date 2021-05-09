@@ -154,14 +154,14 @@ const SignUp = () => {
                         <Grid item>
                             <Grid container direction="row" justify="center">
                                 <Grid item>
-                                    <Typography variant="h4" style={{color: "#E1E1E1"}}> Profile Avatar</Typography>
+                                    <Typography variant="h4" style={{color: "#E1E1E1"}}>Profile Avatar</Typography>
                                 </Grid>
                             </Grid>
                         </Grid>
                         <Grid item>
                             <img className="edit-img" src={profile} alt="prof-img"></img>
                         </Grid>
-                        <Grid item>
+                        {/*<Grid item>
                         <input
                         name="img"
                         accept="image/*"
@@ -173,7 +173,7 @@ const SignUp = () => {
                         <label htmlFor="contained-button-file">
                             <Button component="span" className="upload-img" >Upload image</Button>
                         </label>                            
-                        </Grid>
+                        </Grid>*/}
 
                     </Grid>
                 </Grid>  

@@ -112,7 +112,7 @@ const Profile = ()  => {
                             </Paper>
                                                
                     </Grid>
-                    <Grid item container direction="column" spacing={1}  xs = {12} sm = {6}>                        
+                    <Grid item container direction="column" spacing={1}  xs = {12} sm = {6} className="grid-space-res">                        
                             <Grid item>
                                 <Grid container direction="row" justify = "center" style={{marginTop:40+"px"}}>
                                     <Grid item>

@@ -54,6 +54,10 @@ const SignIn = () => {
                 timer: 2500,
                 timerProgressBar:true
               })
+              setInputs({
+                email:"",
+                password:""                
+            });
             history.push("/sign-in");
         }
     }    
@@ -67,9 +71,8 @@ const SignIn = () => {
     return(
         <div className="background-login">            
             <Grid container direction="row" justify="center" spacing= {0} className="main-box">
-                <Grid item xs={6}>
-                    <Paper variant="elevation" elevation={2} className="paper" >
-                            <Grid container direction="column" justify="center" spacing={2} style={{backgroundColor: "transparent"}}>
+            <Paper variant="elevation" elevation={2} className="paper" > 
+                <Grid item xs = {12} container direction="column" justify="center" spacing={1}>                                               
                                     <Grid item>                                                        
                                         <Grid container direction="column" justify="center" spacing={0} wrap="wrap">
                                             <Grid item >
@@ -104,26 +107,23 @@ const SignIn = () => {
                                                 </Grid>
                                             </form>                                            
                                     </Grid>
-                                    <Grid item style={{paddingTop:0}}>
-                                        <Grid container direction = "row" spacing = {0}>
+                                    <Grid item style={{paddingTop:0}} container direction = "row" spacing = {0}>                                        
                                             <Grid item xs={12} sm={6}>
                                                 <Button className="facebook"
                                                 startIcon = {<Icon path={mdiFacebook} size={1} title="facebook" color="#FFFFFF"/>} variant ="contained" >Facebook</Button>
                                             </Grid>
-                                            <Grid item xs={12} sm={6}>
+                                            <Grid item xs={12} sm={6} className="responsive-button">
                                                 <Button className="google"
                                                 startIcon = {<Icon path={mdiGoogle} size={1} title="facebook" color="#FFFFFF"/>} variant ="contained" >Google</Button>
-                                            </Grid>
-                                        </Grid>
+                                            </Grid>                                    
                                     </Grid>
                                     <Grid item style={{marginBottom:35+'px'}}>
-                                    <Typography className="text" variant="overline" style={{marginInlineStart: 225+'px'}}>Not In Smite Builds? 
-                                    <Link to="/sign-up" className="link"><Typography className="text" variant="overline" style={{marginInlineStart:5 + 'px'}}>Sign Up</Typography></Link></Typography>
+                                    <Typography className="text" variant="overline">Not In Smite Builds? 
+                                    <Link to="/sign-up" className="link"><Typography className="text" variant="overline" >Sign Up</Typography></Link></Typography>
                                     </Grid>
-
-                            </Grid>
-                    </Paper>
-                </Grid>
+                                                
+                    </Grid>
+                </Paper>
             </Grid>
         </div>
     )

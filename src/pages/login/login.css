@@ -30,8 +30,8 @@
 .paper h2{
     font-weight: 800;
     font-size: 24.7471px;
-    line-height: 43px;
-    margin-inline-start: 145px;
+    line-height: 30px;
+    margin-inline-start: 90px;
     text-transform: capitalize;
     color: rgba(255, 255, 255, 0.75);
     opacity: 0.75;
@@ -44,7 +44,7 @@
     text-transform: uppercase;
     line-height: 43px;
     color: #FFFFFF;
-    margin-inline-start: 150px;
+    margin-inline-start: 90px;
     margin-top: 0;
 }
 
@@ -60,7 +60,7 @@
 
 .paper .text{
     color:#E4E4E4;
-    margin-inline-start: 70px;
+    margin-inline-start: 40px;
     text-transform: capitalize;
 }
 
@@ -91,5 +91,155 @@
     color:#FFFFFF;
 }
 
+@media screen and (min-width:768px) and (max-width:1023px){
+    .main-box{    
+        margin-top: 25%;  
+        height: auto;            
+    }
+}
+@media screen and (min-width:601px) and (max-width:767px){
+    .main-box{    
+        margin-top: 0%;              
+    }
+    .background-login{
+        height: auto;
+    }
+}
 
+@media only screen and (max-width:400px){
+    .main-box{    
+        margin-top: 10%;       
+    }
+    .paper {
+        border-radius: 50px !important;
+        -webkit-border-radius: 50px !important;
+        -moz-border-radius: 50px !important;
+        -ms-border-radius: 50px !important;
+        -o-border-radius: 50px !important;
+        height: auto;        
+}
+    .paper img{
+        margin: 5% 8%;
+    }
+    .paper h2{
+        font-weight: 800;
+        font-size: large;
+        line-height: 0px;
+        margin-inline-start: 5%;
+    }
+    .paper .text {
+        margin-inline-start:  30px;
+    }
+    .paper h1{
+        font-size: x-large;
+        line-height: 40px;
+        margin-inline-start: 5%;
+        margin-top: 0;
+    }
+    .paper .facebook {
+        width: 80%;
+        margin-left: 10%;
+    }
+    .paper .google {
+        width: 80%;
+        margin-left: 10%;
+        background: #4285F4;
+        border: 1px solid #C4C4C4;
+        color:#FFFFFF;
+    }
+    .responsive-button{
+        margin-top: 5px !important;
+    }
+}
+@media screen and (min-width:401px) and (max-width:600px){
+    .main-box{    
+        margin-top: 15%;      
+    }
+    .paper {
+        border-radius: 50px !important;
+        -webkit-border-radius: 50px !important;
+        -moz-border-radius: 50px !important;
+        -ms-border-radius: 50px !important;
+        -o-border-radius: 50px !important;
+        height: auto;        
+}
+    .paper img{
+        margin: 8% 25%;
+    }
+    .paper h2{
+        font-weight: 800;
+        font-size: large;
+        line-height: 2px;
+        margin-inline-start: 10%;
+    }
+    .paper .text {
+        margin-inline-start:  30px;
+    }
+    .paper h1{
+        font-size: xx-large;
+        line-height: 50px;
+        margin-inline-start: 10%;
+        margin-top: 0;
+    }
+    .paper .facebook {
+        width: 80%;
+        margin-left: 10%;
+    }
+    .paper .google {
+        width: 80%;
+        margin-left: 10%;
+        background: #4285F4;
+        border: 1px solid #C4C4C4;
+        color:#FFFFFF;
+    }
+    .responsive-button{
+        margin-top: 5px !important;
+    }
+}
 
+@media only screen and (max-width:400px){
+    .main-box{    
+        margin-top: 10%;       
+    }
+    .paper {
+        border-radius: 50px !important;
+        -webkit-border-radius: 50px !important;
+        -moz-border-radius: 50px !important;
+        -ms-border-radius: 50px !important;
+        -o-border-radius: 50px !important;
+        height: auto;        
+}
+    .paper img{
+        margin: 5% 8%;
+    }
+    .paper h2{
+        font-weight: 800;
+        font-size: large;
+        line-height: 0px;
+        margin-inline-start: 5%;
+    }
+    .paper .text {
+        margin-inline-start:  30px;
+    }
+    .paper h1{
+        font-size: x-large;
+        line-height: 40px;
+        margin-inline-start: 5%;
+        margin-top: 0;
+    }
+    .paper .facebook {
+        width: 80%;
+        margin-left: 10%;
+    }
+    .paper .google {
+        width: 80%;
+        margin-left: 10%;
+        background: #4285F4;
+        border: 1px solid #C4C4C4;
+        color:#FFFFFF;
+    }
+    .responsive-button{
+        margin-top: 5px !important;
+    }
+    
+}

@@ -97,7 +97,7 @@ const CustomTable = (props) => {
                     </DataGrid> }
                     {
                       !props.selected &&  <DataGrid className={classes.root} checkboxSelection = {props.checkbox}  onSelectionModelChange = {handleSelection}       
-                      disableColumnMenu showCellRightBorder disableSelectionOnClick rowHeight={28} pagination autoPageSize rows = {props.rows} columns = {props.columns} >
+                      disableColumnMenu showCellRightBorder disableSelectionOnClick rowHeight={28} pagination  autoPageSize rows = {props.rows} columns = {props.columns} >
                       </DataGrid> 
                     }  
     </div>)
