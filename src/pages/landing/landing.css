@@ -19,8 +19,16 @@ left: calc(50%/2 - 2px);
 top: 0px;
 margin-top: 15%;
 }
-
-.hero h2 {
+.layout {    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 0px 0px 25px;
+    position: static;
+    width: 90%;
+    height: 210px;
+}
+.layout h2 {
     position: static;
     width: 496px;
     height: 70px;
@@ -36,29 +44,121 @@ margin-top: 15%;
     margin-bottom: 0;
 }
 
-.layout {    
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0px 0px 0px 25px;
-    position: static;
-    width: 90%;
-    height: 210px;
-}
 
-.hero h1{
-position: static;
-height: 140px;
-font-weight: 800;
-font-size: 60px;
-line-height: 50px;
-margin-top: 0;
-margin-inline-start: 25px;
-align-items: center;
-text-transform: uppercase;
-color: rgba(249, 246, 246, 0.8);
-}
+
+    .layout h1{
+    position: static;
+    height: 140px;
+    font-weight: 800;
+    font-size: 60px;
+    line-height: 50px;
+    margin-top: 0;
+    margin-inline-start: 25px;
+    align-items: center;
+    text-transform: uppercase;
+    color: rgba(249, 246, 246, 0.8);
+    }
 
 .strong {
     color: rgba(255, 188, 16, 0.8);
+}
+
+@media screen and (min-width:768px) and (max-width:900px){
+    .hero{        
+        margin-top: 10%;
+        width: auto;
+        height: auto;        
+    }
+    .layout{
+        padding: 0;
+        height: auto;
+        width: 100%;
+    }
+    .layout h2 {                
+        height: 100%;
+        width: auto;   
+        font-weight: 800;
+        font-size: xx-large;
+    }
+    .layout h1{
+        position: static;
+        height: 100%;
+        font-size: xx-large;
+        line-height: 30px;
+        overflow: hidden;                   
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width:767px){
+    .hero{        
+        margin-top: 0;
+        width: auto; 
+        height: auto;       
+    }
+    .layout{
+        padding: 0;
+        height: auto;
+        width: 100%;
+    }
+    .layout h2 {                
+        height: 100%;
+        width: auto;   
+        font-weight: 800;
+        font-size: larger;
+    }
+    .layout h1{
+        position: static;
+        height: 100%;
+        font-size: x-large;
+        line-height: 25px;
+        overflow: hidden;                   
+    }
+}
+@media  screen and (min-width:401px) and (max-width: 600px){
+    .hero{        
+        width: 100%;
+        height: auto;
+    }
+    
+    .layout h2 {                
+        height: auto;
+        font-weight: 800;
+        font-size: larger;
+        width: auto;
+    }
+    .layout h1{
+        position: static;
+        height: auto;
+        font-size: xx-large;
+        line-height: 30px;
+        margin:0;    
+    }
+}
+
+@media only screen and (max-width:400px){
+    .hero{        
+        width: 100%;
+        height: auto;
+        margin-top: 30%;
+    }
+    .layout{
+        height: auto;
+        margin-top: 30%;
+    }
+    
+    .layout h2 {                
+        height: auto;
+        font-weight: 800;
+        font-size: larger;
+        width: auto;
+        line-height: 20px;
+        margin-inline-start: 0px;
+    }
+    .layout h1{
+        position: static;
+        height: auto;
+        font-size:x-large;
+        line-height: 25px;
+        margin:0;    
+    }
 }

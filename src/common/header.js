@@ -50,7 +50,7 @@ const link2 = [
 ]
 
 
-const Header = (props) => {
+const Header = () => {
     let user = useRef();
     let history = useRef();
     let location = useRef();
@@ -157,7 +157,7 @@ const Header = (props) => {
                             ))}
                             {
                                 user.current !== null && <Link key="signout" to = "#">
-                                    <MenuItem className={classes.linkText}>{"sign out"}</MenuItem>
+                                    <MenuItem onClick={logOut} className={classes.linkText}>{"sign out"}</MenuItem>
                                 </Link>
                             }
             </div>)
