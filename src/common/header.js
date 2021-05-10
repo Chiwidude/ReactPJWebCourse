@@ -19,6 +19,11 @@ const styles = makeStyles({
         textTransform: `uppercase`,
         color: `#F2E8E8`
       },
+      drawerText:{
+        textDecoration: `none`,
+        textTransform: `uppercase`,
+        color: `#F2E8E8`
+      },
       link: {
         textDecoration: `none`,
       },
@@ -31,6 +36,9 @@ const styles = makeStyles({
       },
       container: {
           marginTop:`5px`
+      },
+      paper: {
+        background: "#335183"
       }
 
 });
@@ -151,13 +159,13 @@ const Header = () => {
             return (<div>
                 {Links.map(
                             ({title, path}) => (
-                                <Link  key={title} to={path}>
-                                    <MenuItem className={classes.linkText}>{title}</MenuItem>
+                                <Link className={classes.drawerText} key={title} to={path}>
+                                    <MenuItem >{title}</MenuItem>
                                 </Link>
                             ))}
                             {
-                                user.current !== null && <Link key="signout" to = "#">
-                                    <MenuItem onClick={logOut} className={classes.linkText}>{"sign out"}</MenuItem>
+                                user.current !== null && <Link className={classes.drawerText} key="signout" to = "#">
+                                    <MenuItem onClick={logOut}>{"sign out"}</MenuItem>
                                 </Link>
                             }
             </div>)
@@ -175,7 +183,7 @@ const Header = () => {
             >
             <MenuIcon />
             </IconButton>
-            <Drawer {...{
+            <Drawer classes={{ paper: classes.paper }} {...{
             anchor: "left",
             open: drawerOpen,
             onClose: handleDrawerClose,

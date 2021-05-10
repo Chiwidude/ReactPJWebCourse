@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:4200/api/v1/guides/";
+const API_URL = "http://smiteBckendLB-974513310.us-east-2.elb.amazonaws.com:4200/api/v1/guides/";
 
 export const getAll = async () => {
     const response = await axios.get(API_URL).catch(err => err.response);

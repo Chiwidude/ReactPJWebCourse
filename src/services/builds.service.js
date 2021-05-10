@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:4200/api/v1/builds/";
+const API_URL = "http://smiteBckendLB-974513310.us-east-2.elb.amazonaws.com:4200/api/v1/builds/";
 
 export const getAll = async () => {
 

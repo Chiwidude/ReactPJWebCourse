@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:4200/api/v1/users/";
+const API_URL = "http://smiteBckendLB-974513310.us-east-2.elb.amazonaws.com:4200/api/v1/users/";
 export const login = async (username, password) => {
    const response = await axios.post(API_URL+"login", {email:username, password: password}).catch(err => err.response);
    if(response.status === 200){       

@@ -17,10 +17,18 @@ const Entry = (props) => {
         setItems(data);
     }
     const form = useRef();
-    const [name, setName] = React.useState('');
-    const [description, setDescription] = React.useState('');
     const [gods, setGods] = React.useState([]);
     const [items, setItems] = React.useState([]);
+    const [inputs, setInputs] = React.useState({
+        name:"",
+        description:""
+    });
+    const handleChange = e => {
+        const value = e.target.value;
+        setInputs({
+            ...inputs, [e.target.name]:value
+        })
+    }
     let history = useHistory();
     const onSubmit =async(event) => {
         event.preventDefault();
@@ -46,8 +54,8 @@ const Entry = (props) => {
         let currentDate = localDate.getDate();
         let currentyear = localDate.getFullYear();
         const New = {rating:rating,
-        title: name,
-        description: description,
+        title: inputs.name,
+        description: inputs.description,
         gods: godsData.filter((row) => gods.includes(row.id)).map(x => x.name),
         roles:godsData.filter((row) => gods.includes(row.id)).map(x => x.role),
         user: user,
@@ -126,7 +134,7 @@ const Entry = (props) => {
                                             </Typography>
                                         </Grid>
                                         <Grid item style={{padding:"1%"}} sm={10}>
-                                            <TextField value={name} name="name" onInput={e => setName(e.target.value)} style={{color:"whitesmoke !important"}} fullWidth required ></TextField>
+                                            <TextField value={inputs.name} name="name" onChange={handleChange} style={{color:"whitesmoke !important"}} fullWidth required ></TextField>
                                         </Grid>
                                     </Grid>
                                     </Paper>
@@ -140,7 +148,7 @@ const Entry = (props) => {
                                             </Typography>
                                         </Grid>
                                         <Grid item style={{padding:"1%"}} sm={10}>
-                                            <TextField multiline rows = {3} rowsMax = {3} value={description} onInput={e => setDescription(e.target.value)} name="description" style={{color:"whitesmoke !important"}} fullWidth></TextField>
+                                            <TextField multiline rows = {3} rowsMax = {3} value={inputs.description} onChange={handleChange} name="description" style={{color:"whitesmoke !important"}} fullWidth></TextField>
                                         </Grid>
                                     </Grid>
                                     </Paper>
